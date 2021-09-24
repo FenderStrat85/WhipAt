@@ -9,7 +9,6 @@ export default function Meets() {
   const user = useSelector((state) => state.loggedUser);
   const myMeets = "my";
   const joinedMeets = "joined";
-  // const joinMeets = "join";
   return (
     <div>
       <h1>Hi, {user.user_name || "no user"} From Meets</h1>

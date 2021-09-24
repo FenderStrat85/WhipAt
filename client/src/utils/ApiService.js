@@ -49,6 +49,30 @@ apiService.getMeets = async (meetType) => {
     .catch((err) => console.log(err));
 };
 
+apiService.joinAMeet = async (meet) => {
+  return fetch(`${BASE_URL}/join/meets`, {
+    method: "POST",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(meet),
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
+apiService.leaveAMeet = async (meet) => {
+  return fetch(`${BASE_URL}/leave/meets`, {
+    method: "DELETE",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(meet),
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
 apiService.searchUsers = async (search) => {
   return fetch(`${BASE_URL}/search/users`, {
     method: "POST",
@@ -56,6 +80,30 @@ apiService.searchUsers = async (search) => {
     mode: "cors",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(search),
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
+apiService.addFriend = async (friend) => {
+  return fetch(`${BASE_URL}/search/addFriend`, {
+    method: "POST",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(friend),
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
+apiService.removeFriend = async (friend) => {
+  return fetch(`${BASE_URL}/search/removeFriend`, {
+    method: "DELETE",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(friend),
   })
     .then((res) => res.json())
     .catch((err) => console.log(err));

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import apiService from "../../utils/ApiService";
+import "./SearchBar.css";
 const initialState = {
   search_bar: "",
 };
-export default function SearchBar() {
+export default function SearchBar(props) {
   const [search, setSearch] = useState(initialState);
-  const [userList, setUserList] = useState([]);
+
   //update private state on input change
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,15 +18,15 @@ export default function SearchBar() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("search poop");
-    await apiService.searchUsers(search);
-    // const resultUserList =
+    const resultUserList = await apiService.searchUsers(search);
+    props.setUserList(resultUserList);
   };
 
   return (
     <div>
       <form className="input" onSubmit={handleSubmit}>
         <input
+          className="field"
           type="text"
           name="search_bar"
           id="search_bar"

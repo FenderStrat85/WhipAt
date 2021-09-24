@@ -1,0 +1,13 @@
+.find_friends_cont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.friend_banners {
+  width: 100%;
+  height: 100%;
+}
+.search_bar {
+  margin: 1rem;
+}

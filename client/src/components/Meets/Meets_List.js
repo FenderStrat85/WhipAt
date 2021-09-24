@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import apiService from "../../utils/ApiService";
+import "./Meets_List.css";
+import Meet from "./Meet";
 
 export default function MeetsList(props) {
   //takes a prop that defines what type of list it will render joined, to join, my meets
@@ -20,7 +22,7 @@ export default function MeetsList(props) {
         {state.map((meet) => {
           return (
             <li key={meet.CarMeetId}>
-              <h3>{meet.meet_name}</h3>
+              <Meet meet={meet} meetType={props.meetType}></Meet>
             </li>
           );
         })}

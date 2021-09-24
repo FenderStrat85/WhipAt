@@ -1,10 +1,10 @@
-.meet_contaner {
+.friend_banner_cont {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   width: 95%;
-  height: 3rem;
+  height: 7rem;
   padding: 0;
   background-color: #c9ada7;
   border-radius: 1rem;
@@ -15,7 +15,19 @@
   margin: 0.5rem;
 }
 
-button {
+.picture_cont img {
+  height: 5.5rem;
+  width: 5.5rem;
+  border-radius: 30%;
+}
+.user_info {
+  width: 30%;
+}
+.user_name {
+  font-size: medium;
+  font-weight: 700;
+}
+.car_info {
   font-size: small;
-  border-radius: 0.5rem;
+  font-weight: 500;
 }
