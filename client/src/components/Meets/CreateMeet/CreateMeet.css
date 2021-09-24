@@ -1,0 +1,8 @@
+.create_meet_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+h1 {
+  text-align: center;
+}

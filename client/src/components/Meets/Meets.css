@@ -1,0 +1,9 @@
+.meet_create_join_cont {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+h1 {
+  text-align: center;
+}
