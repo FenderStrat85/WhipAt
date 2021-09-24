@@ -28,6 +28,7 @@ const getMyMeets = async (req, res) => {
     const result = await db.Car_Meets.findAll({
       where: { creator_id: user_id },
     });
+
     res.send(result);
     res.status(200);
   } catch (error) {
@@ -44,7 +45,7 @@ const getJoinedMeets = async (req, res) => {
     });
 
     const carMeets = result[0].Car_Meets;
-
+    // console.log(carMeets);
     res.send(carMeets);
     res.status(200);
   } catch (error) {
@@ -121,8 +122,8 @@ const getJoinMeets = async (req, res) => {
 const joinAMeet = async (req, res) => {
   try {
     const user_id = req.user._id;
-    const { meet } = req.body;
-    const getJoinedMeet = db.Car_Meets.findOne({
+    const meet = req.body;
+    const getJoinedMeet = await db.Car_Meets.findOne({
       where: { _id: meet._id },
     });
     await getJoinedMeet.addUser(user_id);
@@ -134,18 +135,17 @@ const joinAMeet = async (req, res) => {
 
 const leaveAMeet = async (req, res) => {
   try {
-    const currentUser_id = req.user._id;
+    const currentUser = req.user;
 
-    //friend var contains the username
-    const { meet } = req.body;
+    const meet = req.body;
 
-    //
+    //get meet model
+    const meetInstance = await db.Car_Meets.findOne({
+      where: { _id: meet._id },
+    });
 
-    console.log(friendShip);
-
-    //destory friendship
-    await friendShip.destroy();
-    // .then((res) => console.log("destroyed", res));
+    //remove user from meet
+    meetInstance.removeUser(currentUser);
 
     res.send(false);
     res.status(201);

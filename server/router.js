@@ -8,13 +8,13 @@ const {
   getJoinedMeets,
   getJoinMeets,
   joinAMeet,
+  leaveAMeet,
 } = require("./controllers/meets/meets");
 const {
   searchUser,
   removeFriend,
   addFriend,
 } = require("./controllers/friends/search");
-//TODO: Add routes
 
 router.post("/register", register);
 router.post("/login", login);
@@ -29,6 +29,7 @@ router.post("/join/meets", authMiddleware, joinAMeet); // join a meet
 router.post("/search/users", authMiddleware, searchUser); // show meets to be joined
 router.post("/search/addFriend", authMiddleware, addFriend); // adds friend
 router.delete("/search/removeFriend", authMiddleware, removeFriend); // removes friend
+router.delete("/leave/meets", authMiddleware, leaveAMeet); // removes friend
 router.get("/logout", authMiddleware);
 
 module.exports = router;

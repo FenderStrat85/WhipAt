@@ -7,18 +7,14 @@ export default function Meet(props) {
 
   useEffect(() => {
     setState(props.meet);
-    console.log(state);
   }, []);
 
-  const buttonAction = async () => {
-    if (props.meetType === "my" || props.meetType === "joined") {
+  const buttonLabel = () => {
+    if (props.meetType === "my") {
+      return "Delete Meet";
+    } else if (props.meetType === "joined") {
       return "Leave Meet";
     } else {
-      try {
-        await apiService.joinAMeet(state);
-      } catch (error) {
-        console.log(error);
-      }
       return "Join Meet";
     }
   };
@@ -27,7 +23,9 @@ export default function Meet(props) {
     <div className="meet_contaner">
       <p className="meet_d">{state.meet_name}</p>
       <p className="meet_name">{state.meet_date}</p>
-      <button>{buttonAction()}</button>
+      <button onClick={() => props.meetButtonAction(props.meetType, state)}>
+        {buttonLabel()}
+      </button>
     </div>
   );
 }
