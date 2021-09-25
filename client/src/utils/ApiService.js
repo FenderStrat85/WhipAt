@@ -50,14 +50,14 @@ apiService.getMeets = async (meetType) => {
 };
 
 apiService.joinAMeet = async (meet) => {
-  return fetch(`${BASE_URL}/join/meets`, {
+  fetch(`${BASE_URL}/join/meets`, {
     method: "POST",
     credentials: "include",
     mode: "cors",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(meet),
   })
-    .then((res) => res.json())
+    // .then((res) => res.json())
     .catch((err) => console.log(err));
 };
 

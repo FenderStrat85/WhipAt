@@ -9,20 +9,26 @@ export default function MeetsList(props) {
 
   const getMeets = async () => {
     const meet_list = await apiService.getMeets(props.meetType);
+    // console.log(props.meetType);
     console.log("meet_list", meet_list);
+
     setState(meet_list);
   };
 
   const meetButtonAction = async (action, meet) => {
     try {
-      console.log("action", action);
-
+      // console.log(meet);
       if (action === "my") {
+        console.log("my action", action);
         return "";
       } else if (action === "joined") {
+        //leave meet
+        console.log("joined action", action);
         await apiService.leaveAMeet(meet);
         getMeets();
-      } else {
+      } else if (action === "join") {
+        //join meet
+        console.log("join action meetType", meet);
         await apiService.joinAMeet(meet);
         getMeets();
       }

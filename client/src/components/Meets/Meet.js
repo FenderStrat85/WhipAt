@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import apiService from "../../utils/ApiService";
+
 import "./Meet.css";
 
 export default function Meet(props) {

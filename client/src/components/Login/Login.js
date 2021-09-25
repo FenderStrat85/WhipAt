@@ -31,11 +31,11 @@ export default function Login() {
     e.preventDefault();
 
     const { user_name, password } = state;
-    console.log(state);
+
     const newUser = { user_name, password };
     try {
       const user = await apiService.login(newUser);
-      console.log(user);
+
       dispatch(login_action(user));
       //redirect to meets page
       history.push("/meets");

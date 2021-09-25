@@ -72,6 +72,7 @@ const getJoinMeets = async (req, res) => {
       include: db.Car_Meets,
     });
     const joinedCarMeets = result[0].Car_Meets;
+
     // console.log("joined car meet", joinedCarMeets);
 
     const list_of_friends_meets = [];
@@ -88,26 +89,51 @@ const getJoinMeets = async (req, res) => {
         where: { creator_id: user.dataValues._id },
       });
       // console.log("meets", meets);
-
-      if (!joinedCarMeets.length) {
-        console.log("here");
+      // console.log("joinedCarMeets>>>>", joinedCarMeets.length);
+      if (joinedCarMeets.length < 1) {
+        console.log("all meets");
         list_of_friends_meets.push(...meets);
       } else {
-        for (let meet of meets) {
-          for (let joinedMeet of joinedCarMeets) {
-            // console.log("joined meet", joinedMeet);
-            //if meet not been joined, the push to array to be return to client
-            if (meet.dataValues._id !== joinedMeet.dataValues._id) {
-              // console.log("for loop meet", meet);
-              list_of_friends_meets.push(meet);
-            }
+        console.log(
+          "allMeets",
+          meets.map((meet) => meet.dataValues._id)
+        );
+        console.log(
+          "All Joined Meets",
+          joinedCarMeets.map((meet) => meet.dataValues._id)
+        );
+
+        // const allMeets = meets.map((meet) => meet.dataValues._id);
+        const allJoined = joinedCarMeets.map((meet) => meet.dataValues._id);
+
+        meets.forEach((meet) => {
+          if (!allJoined.includes(meet.dataValues._id)) {
+            list_of_friends_meets.push(meet);
           }
-        }
+        });
+
+        // for (let meet of meets) {
+        //   //friend's created meet list
+        //   for (let joinedMeet of joinedCarMeets) {
+        //     console.log(
+        //       "friend meet",
+        //       meet.dataValues._id,
+        //       "joinedMeet",
+        //       joinedMeet.dataValues._id
+        //     );
+        //     // console.log("joined meet", joinedMeet);
+        //     //if meet not been joined, the push to array to be return to client
+        //     if (meet.dataValues._id !== joinedMeet.dataValues._id) {
+        //       // console.log("for loop meet", meet);
+        //       list_of_friends_meets.push(meet);
+        //     }
+        //   }
+        // }
       }
 
       // console.log("meets", meets);
 
-      //      list_of_friends_meets.push(...meets);
+      //  list_of_friends_meets.push(...meets);
     }
     // console.log("user's friend's user profile", list_of_friends_meets);
 
@@ -127,6 +153,20 @@ const joinAMeet = async (req, res) => {
       where: { _id: meet._id },
     });
     await getJoinedMeet.addUser(user_id);
+
+    // console.log("JoinedMeets");
+    const result = await db.User.findAll({
+      where: { _id: user_id },
+      include: db.Car_Meets,
+    });
+
+    // //list of joined car meets for this user
+    // const carMeets = result[0].Car_Meets;
+    // console.log("reight before");
+    // console.log(carMeets);
+
+    // res.send("list_of_friends_meets");
+    res.status(200).end();
   } catch (error) {
     console.log(error);
     res.status(500);
