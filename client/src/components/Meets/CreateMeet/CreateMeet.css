@@ -3,6 +3,13 @@
   flex-direction: column;
   align-items: center;
 }
+#create_meet_button {
+  margin: 1rem;
+}
 h1 {
   text-align: center;
+}
+.google_maps_cont {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }

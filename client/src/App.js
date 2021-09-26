@@ -8,6 +8,7 @@ import Nav from "./components/Nav/Nav";
 import CreateMeet from "./components/Meets/CreateMeet/CreateMeet";
 import JoinMeets from "./components/Meets/JoinMeets";
 import FindFriends from "./components/FindFriends/FindFriends";
+import MeetInfo from "./components/Meets/MeetInfo";
 
 function App() {
   return (
@@ -46,6 +47,12 @@ function App() {
           </Route>
           <Route exact path="/search/users">
             <FindFriends></FindFriends>
+            <div className="nav_container">
+              <Nav></Nav>
+            </div>
+          </Route>
+          <Route exact path="/meet/info">
+            <MeetInfo></MeetInfo>
             <div className="nav_container">
               <Nav></Nav>
             </div>

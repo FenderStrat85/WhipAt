@@ -16,7 +16,6 @@ const loggedUser = (
   action
 ) => {
   if (action.type === "LOGGEDIN") {
-    console.log(action.payload, "hello");
     const newState = {
       ...state,
       user_name: action.payload.user_name,
@@ -30,19 +29,44 @@ const loggedUser = (
       following_count: action.payload.following_count,
       profile: action.payload.profile,
     };
-    console.log(newState, "reducer");
     return newState;
   }
-
   return state;
 };
 
-const dummyReducer = (state = 0, action) => {
+const meet_info = (
+  state = {
+    createdAt: "",
+    creator_id: "",
+    meet_date: "",
+    meet_description: "",
+    meet_location: "",
+    meet_name: "",
+    updatedAt: "",
+    _id: "",
+  },
+  action
+) => {
+  if (action.type === "MEET_INFO") {
+    const newState = {
+      ...state,
+      createdAt: action.payload.createdAt,
+      creator_id: action.payload.creator_id,
+      meet_date: action.payload.meet_date,
+      meet_description: action.payload.meet_description,
+      meet_location: action.payload.meet_location,
+      meet_name: action.payload.meet_name,
+      updatedAt: action.payload.updatedAt,
+      _id: action.payload._id,
+    };
+    return newState;
+  }
   return state;
 };
+
 const reducers = combineReducers({
   loggedUser,
-  dummyReducer,
+  meet_info,
 });
 
 export default reducers;

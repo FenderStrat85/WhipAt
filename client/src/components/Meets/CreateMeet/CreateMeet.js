@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import apiService from "../../../utils/ApiService";
 import "./CreateMeet.css";
+import GoogleMaps from "../GoogleMaps";
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatlng,
+} from "use-places-autocomplete";
 
 const initialState = {
   meet_name: "",
@@ -61,6 +66,20 @@ export default function CreateMeet() {
     state.meet_location,
   ]);
 
+  //Google places auto complete
+  const Search = () => {
+    const {
+      ready,
+      value,
+      suggestion: { status, data },
+      setValue,
+      clearSuggestions,
+    } = usePlacesAutocomplete({
+      // requestOptions:{
+      // }
+    });
+  };
+
   return (
     <div>
       <h1>Create Meet</h1>
@@ -73,7 +92,6 @@ export default function CreateMeet() {
           id="meet_name"
           onChange={handleChange}
         />
-
         <label htmlFor="meet_date">Meet Date</label>
         <input
           type="datetime-local"
@@ -81,7 +99,6 @@ export default function CreateMeet() {
           id="meet_date"
           onChange={handleChange}
         />
-
         <label htmlFor="meet_description">Meet Description</label>
         <input
           type="text"
@@ -89,7 +106,6 @@ export default function CreateMeet() {
           id="meet_description"
           onChange={handleChange}
         />
-
         <label htmlFor="meet_location">Meet Location</label>
         <input
           type="text"
@@ -97,8 +113,14 @@ export default function CreateMeet() {
           id="meet_location"
           onChange={handleChange}
         />
-
-        <button type="submit" disabled={state.disable_form}>
+        <Search></Search>
+        <div className="google_maps_cont"></div>
+        <GoogleMaps></GoogleMaps>
+        <button
+          id="create_meet_button"
+          type="submit"
+          disabled={state.disable_form}
+        >
           Create Meet
         </button>
       </form>

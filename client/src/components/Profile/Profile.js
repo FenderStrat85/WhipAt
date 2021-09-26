@@ -9,7 +9,8 @@ export default function Profile() {
 
   return (
     <div>
-      <h1>Hi, {user.user_name || "no user"} From Profile</h1>
+      <h1>{user.user_name || "no user"}</h1>
+      <div className=""></div>
     </div>
   );
 }
