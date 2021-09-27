@@ -1,0 +1,6 @@
+.search_cont {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  text-align: center !important;
+}

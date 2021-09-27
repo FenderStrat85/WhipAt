@@ -1,6 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router";
 import "./Nav.css";
+import searchIcon from "../../images/search.png";
+import carMeetIcon from "../../images/traffic-jam.png";
+import carProfileIcon from "../../images/front-car.png";
 
 export default function Nav() {
   const history = useHistory();
@@ -8,13 +11,13 @@ export default function Nav() {
   return (
     <div className="nav">
       <div className="search" onClick={() => history.push("/search/users")}>
-        Search
+        <img src={searchIcon} alt="search for user" />
       </div>
       <div className="meets" onClick={() => history.push("/meets")}>
-        Meets
+        <img src={carMeetIcon} alt="search for user" />
       </div>
       <div className="profile" onClick={() => history.push("/profile")}>
-        Profile
+        <img src={carProfileIcon} alt="search for user" />
       </div>
     </div>
   );

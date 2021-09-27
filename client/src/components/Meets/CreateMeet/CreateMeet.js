@@ -2,11 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import apiService from "../../../utils/ApiService";
 import "./CreateMeet.css";
-import GoogleMaps from "../GoogleMaps";
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatlng,
-} from "use-places-autocomplete";
+import GoogleMaps from "../GoogleMaps/GoogleMaps";
+import { useSelector } from "react-redux";
 
 const initialState = {
   meet_name: "",
@@ -18,7 +15,13 @@ const initialState = {
 
 export default function CreateMeet() {
   const [state, setState] = useState(initialState);
+
   const history = useHistory();
+  // useSelector((state) => {
+  //   setState((prevState) => ({ ...prevState, meet_location: state.mapInfo }));
+  // });
+
+  let location = useSelector((state) => state.mapInfo);
 
   //update private state on input change
   const handleChange = (e) => {
@@ -29,22 +32,25 @@ export default function CreateMeet() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { meet_name, meet_date, meet_description, meet_location } = state;
+    const { meet_name, meet_date, meet_description } = state;
+    console.log("locaton", location);
     const newMeet = {
       meet_name,
       meet_date,
       meet_description,
-      meet_location,
+      meet_location: location,
     };
+    console.log("newmeet", newMeet);
 
     //send new meet to db, potentialy do not need to create in store
-    apiService
-      .createMeet(newMeet)
-      .then(history.push("/meets"))
-      .catch(console.log("error creating"));
+
+    try {
+      await apiService.createMeet(newMeet);
+      history.push("/meets");
+    } catch (error) {}
   };
 
   function validateForm() {
@@ -54,66 +60,42 @@ export default function CreateMeet() {
         !state.meet_name ||
         !state.meet_date ||
         !state.meet_description ||
-        !state.meet_location,
+        !location,
     }));
   }
   useEffect(() => {
     validateForm();
-  }, [
-    state.meet_name,
-    state.meet_date,
-    state.meet_description,
-    state.meet_location,
-  ]);
-
-  //Google places auto complete
-  const Search = () => {
-    const {
-      ready,
-      value,
-      suggestion: { status, data },
-      setValue,
-      clearSuggestions,
-    } = usePlacesAutocomplete({
-      // requestOptions:{
-      // }
-    });
-  };
+  }, [state.meet_name, state.meet_date, state.meet_description, location]);
 
   return (
-    <div>
+    <div className="create_meet_conts">
       <h1>Create Meet</h1>
 
       <form className="create_meet_form" onSubmit={handleSubmit}>
-        <label htmlFor="meet_name">Meet Name</label>
         <input
           type="text"
           name="meet_name"
           id="meet_name"
           onChange={handleChange}
+          placeholder="Meet Name"
         />
-        <label htmlFor="meet_date">Meet Date</label>
+
         <input
           type="datetime-local"
           name="meet_date"
           id="meet_date"
           onChange={handleChange}
+          placeholder="Meet Date"
         />
-        <label htmlFor="meet_description">Meet Description</label>
+
         <input
           type="text"
           name="meet_description"
           id="meet_description"
           onChange={handleChange}
+          placeholder="Meet Description"
         />
-        <label htmlFor="meet_location">Meet Location</label>
-        <input
-          type="text"
-          name="meet_location"
-          id="meet_location"
-          onChange={handleChange}
-        />
-        <Search></Search>
+
         <div className="google_maps_cont"></div>
         <GoogleMaps></GoogleMaps>
         <button

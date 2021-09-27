@@ -64,9 +64,24 @@ const meet_info = (
   return state;
 };
 
+const mapInfo = (state = { lat: 0, lng: 0 }, action) => {
+  if (action.type === "SET_NEW_MAP_LOC") {
+    const newState = {
+      ...state,
+      lat: action.payload.lat,
+      lng: action.payload.lng,
+    };
+    console.log("newState", newState);
+    return newState;
+  }
+
+  return state;
+};
+
 const reducers = combineReducers({
   loggedUser,
   meet_info,
+  mapInfo,
 });
 
 export default reducers;

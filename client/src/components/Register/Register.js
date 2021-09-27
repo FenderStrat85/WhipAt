@@ -57,36 +57,38 @@ export default function Register() {
     <div className="register_container">
       <h2>Register</h2>
       <form className="register_form" onSubmit={handleSubmit}>
-        <label htmlFor="user_name">Username</label>
         <input
           type="text"
           name="user_name"
           id="user_name"
           value={state.user_name}
           onChange={handleChange}
+          placeholder="Username"
         />
 
-        <label htmlFor="password">Password</label>
         <input
           type="password"
           name="password"
           id="password"
           value={state.password}
           onChange={handleChange}
+          placeholder="Password"
         />
 
-        <label htmlFor="user_email">Email</label>
         <input
-          type="text"
+          type="email"
           name="user_email"
           id="user_email"
           value={state.user_email}
           onChange={handleChange}
+          placeholder="Email"
         />
 
-        <label htmlFor="year">Year</label>
         <select name="year" id="year" onChange={handleChange}>
-          <option value=""></option>
+          <option value="" disabled selected>
+            Year
+          </option>
+
           <option value="2014">2021</option>
           <option value="2014">2020</option>
           <option value="2014">2019</option>
@@ -121,9 +123,10 @@ export default function Register() {
           <option value="1990">1990</option>
         </select>
 
-        <label htmlFor="make">Make</label>
         <select name="make" id="make" onChange={handleChange}>
-          <option value=""></option>
+          <option value="" disabled selected>
+            Make
+          </option>
           <option value="ACURA">ACURA</option>
           <option value="ASTON MARTIN">ASTON MARTIN</option>
           <option value="AUDI">AUDI</option>
@@ -170,9 +173,10 @@ export default function Register() {
           <option value="VOLVO">VOLVO</option>
         </select>
 
-        <label htmlFor="model">Model</label>
         <select name="model" id="model" onChange={handleChange}>
-          <option value=""></option>
+          <option value="" disabled selected>
+            Model
+          </option>
           <option value="COMMANDER">COMMANDER</option>
           <option value="COMPASS">COMPASS</option>
           <option value="GRAND CHEROKEE">GRAND CHEROKEE</option>

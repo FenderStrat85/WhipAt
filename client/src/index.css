@@ -98,17 +98,14 @@ html {
 }
 
 body {
-  background: #0f2027; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to top,
-    #2c5364,
-    #203a43,
-    #0f2027
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to top,
-    #2c5364,
-    #203a43,
-    #0f2027
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  /* background: #0f2027;
+  background: -webkit-linear-gradient(to top, #2c5364, #203a43, #0f2027);
+  background: linear-gradient(to top, #2c5364, #203a43, #0f2027); */
+  font-family: "Lato", sans-serif;
+  background-image: url("https://images.pexels.com/photos/7799285/pexels-photo-7799285.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500");
+  /* background-image: url("https://images.pexels.com/photos/5437475/pexels-photo-5437475.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"); */
+  background-position: center;
+  /* background-size: contain; */
+  padding: 0.9rem;
 }
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&display=swap");

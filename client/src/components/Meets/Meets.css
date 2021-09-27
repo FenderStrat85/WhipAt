@@ -12,6 +12,19 @@
   margin: 0.5rem;
 }
 
-h1 {
+.car_meets_container h1 {
   text-align: center;
+  color: lightgray;
+  margin: 2rem;
+  margin-bottom: 1rem;
+}
+
+.car_meets_container h3 {
+  color: lightgray;
+}
+
+.joined_meets_container,
+.my_meets_container {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }

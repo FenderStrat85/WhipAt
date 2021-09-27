@@ -1,0 +1,5 @@
+.google_maps_container_p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

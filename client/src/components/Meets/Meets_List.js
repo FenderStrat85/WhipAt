@@ -19,16 +19,15 @@ export default function MeetsList(props) {
     try {
       // console.log(meet);
       if (action === "my") {
-        console.log("my action", action);
         return "";
       } else if (action === "joined") {
         //leave meet
-        console.log("joined action", action);
+
         await apiService.leaveAMeet(meet);
         getMeets();
       } else if (action === "join") {
         //join meet
-        console.log("join action meetType", meet);
+
         await apiService.joinAMeet(meet);
         getMeets();
       }

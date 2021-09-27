@@ -2,6 +2,7 @@
 const { v4: uuidv4 } = require("uuid");
 const db = require("../../models/db");
 const { Op } = db;
+const moment = require("moment");
 
 const createMeet = async (req, res) => {
   try {
@@ -11,7 +12,10 @@ const createMeet = async (req, res) => {
       ...req.body,
       creator_id: user._id,
       _id: uuidv4(),
+      meet_location: JSON.stringify(req.body.meet_location),
+      meet_date: moment(user.meet_date).format("lll"),
     };
+    console.log(newCar_Meet);
     //create a new meet
     const newCarMeet = await db.Car_Meets.create(newCar_Meet);
 
@@ -28,7 +32,7 @@ const getMyMeets = async (req, res) => {
     const result = await db.Car_Meets.findAll({
       where: { creator_id: user_id },
     });
-
+    console.log(result);
     res.send(result);
     res.status(200);
   } catch (error) {
@@ -111,29 +115,7 @@ const getJoinMeets = async (req, res) => {
             list_of_friends_meets.push(meet);
           }
         });
-
-        // for (let meet of meets) {
-        //   //friend's created meet list
-        //   for (let joinedMeet of joinedCarMeets) {
-        //     console.log(
-        //       "friend meet",
-        //       meet.dataValues._id,
-        //       "joinedMeet",
-        //       joinedMeet.dataValues._id
-        //     );
-        //     // console.log("joined meet", joinedMeet);
-        //     //if meet not been joined, the push to array to be return to client
-        //     if (meet.dataValues._id !== joinedMeet.dataValues._id) {
-        //       // console.log("for loop meet", meet);
-        //       list_of_friends_meets.push(meet);
-        //     }
-        //   }
-        // }
       }
-
-      // console.log("meets", meets);
-
-      //  list_of_friends_meets.push(...meets);
     }
     // console.log("user's friend's user profile", list_of_friends_meets);
 

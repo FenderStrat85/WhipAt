@@ -7,12 +7,82 @@
 
 .register_container h2 {
   text-align: center;
+  color: lightgray;
+  margin-top: 2rem;
+}
+.register_form button {
+  margin: 1rem;
+  width: 7rem;
+  height: 2.5rem;
+  background: none;
+  color: white;
+  border-color: lightgray;
+  border-width: 0.1px;
+  font-weight: 800;
+  font-size: 1rem;
+}
+.register_container label {
+  color: lightgray;
 }
 
-input {
-  margin-top: 1rem;
-}
-
+.register_container input,
 select {
+  margin: 2rem;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: none;
+  border-color: lightgray;
+  border-width: 0.1px;
+  color: white;
+}
+
+.register_container select {
+  align-self: flex-start;
+  margin-left: 6.4rem;
   margin-top: 1rem;
+}
+
+input[type="email"]::placeholder {
+  /* Firefox, Chrome, Opera */
+  color: white;
+}
+
+input[type="email"]:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: white;
+}
+
+input[type="email"]::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: white;
+}
+input[type="text"]::placeholder {
+  /* Firefox, Chrome, Opera */
+  color: white;
+}
+
+input[type="text"]:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: white;
+}
+
+input[type="text"]::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: white;
+}
+
+input[type="password"]::placeholder {
+  /* Firefox, Chrome, Opera */
+  color: white;
+}
+
+input[type="password"]:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: white;
+}
+
+input[type="password"]::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: white;
 }

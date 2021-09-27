@@ -58,21 +58,22 @@ export default function Login() {
     <div className="login_cont">
       <h1>Login</h1>
       <form className="form_login" onSubmit={handleSubmit}>
-        <label htmlFor="user_name">Username</label>
         <input
           type="text"
           name="user_name"
           id="user_name"
           value={state.user_name}
           onChange={handleChange}
+          placeholder="Username"
         />
-        <label htmlFor="password">Password</label>
+
         <input
           type="password"
           name="password"
           id="password"
           value={state.password}
           onChange={handleChange}
+          placeholder="Password"
         />
 
         <button type="submit" disabled={state.disable_form}>

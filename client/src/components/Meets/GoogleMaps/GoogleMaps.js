@@ -1,26 +1,18 @@
 import React, { useState, useRef, useCallback } from "react";
-import markerImg from "../../images/pistons.png";
+import markerImg from "../../../images/pistons.png";
+import { update_map } from "../../../utils/actions";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
-
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatlng,
-} from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
+import { useDispatch } from "react-redux";
+import Search from "../GoogleMaps/Search";
 import "@reach/combobox/styles.css";
+import "./GoogleMaps.css";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-  width: "95vw",
-  height: "40vh",
+  width: "89vw",
+  height: "34vh",
 };
-const center = {
+let center = {
   lat: 25.7617,
   lng: 80.1918,
 };
@@ -30,7 +22,9 @@ const options = {
   zoomControl: true,
 };
 
-export default function GoogleMaps() {
+export default function GoogleMaps(porps) {
+  const dispatch = useDispatch();
+
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries: libraries,
@@ -39,7 +33,9 @@ export default function GoogleMaps() {
 
   //on map click the state gets updated
   const updateMarker = async (event) => {
+    console.log(event);
     setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
+    dispatch(update_map(marker));
   };
 
   //ref to the map instance so that we can update it as we search
@@ -48,11 +44,21 @@ export default function GoogleMaps() {
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
+  const panTo = useCallback(({ lat, lng }) => {
+    mapRef.current.panTo({ lat, lng });
+    mapRef.current.setZoom(14);
+  }, []);
+
+  //function to pan to a map location searched
 
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading Maps";
   return (
-    <div>
+    <div className="google_maps_container_p">
+      <div className="search_container_g">
+        <Search panTo={panTo}></Search>
+      </div>
+
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={8}

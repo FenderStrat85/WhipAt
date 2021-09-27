@@ -10,8 +10,8 @@ export default function Meets() {
   const myMeets = "my";
   const joinedMeets = "joined";
   return (
-    <div>
-      <h1>Hi, {user.user_name || "no user"} From Meets</h1>
+    <div className="car_meets_container">
+      <h1>{"Meets" || "no logged inuser"}</h1>
       <div className="meet_create_join_cont">
         <button onClick={() => history.push("/create/meet")}>
           Create Meet

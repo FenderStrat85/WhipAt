@@ -2,13 +2,73 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 4rem;
 }
-h1 {
+.login_cont h1 {
   text-align: center;
+  color: lightgray;
+  margin-top: 2rem;
 }
 .login_cont {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.form_login input {
+  margin: 2rem;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: none;
+  border-color: lightgray;
+  border-width: 0.1px;
+  color: white;
+}
+
+.form_login button {
+  margin: 1rem;
+  width: 7rem;
+  height: 2.5rem;
+  background: none;
+  color: white;
+  border-color: lightgray;
+  border-width: 0.1px;
+  font-weight: 800;
+  font-size: 1rem;
+}
+
+.create_account a {
+  color: white;
+}
+
+input[type="text"]::placeholder {
+  /* Firefox, Chrome, Opera */
+  color: white;
+}
+
+input[type="text"]:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: white;
+}
+
+input[type="text"]::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: white;
+}
+
+input[type="password"]::placeholder {
+  /* Firefox, Chrome, Opera */
+  color: white;
+}
+
+input[type="password"]:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: white;
+}
+
+input[type="password"]::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: white;
 }

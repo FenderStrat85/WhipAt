@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) =>
       allowNull: false,
     },
     meet_date: {
-      type: DataTypes.DATE,
+      type: DataTypes.STRING,
       allowNull: false, //could be change to true to allow TBA meets.
     },
     meet_description: {

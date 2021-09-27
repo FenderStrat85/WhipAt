@@ -6,10 +6,41 @@
 #create_meet_button {
   margin: 1rem;
 }
-h1 {
+.create_meet_conts h1 {
+  color: lightgray;
+  margin-top: 2rem;
   text-align: center;
 }
 .google_maps_cont {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.create_meet_form input {
+  margin: 1.5rem;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: none;
+  border-color: lightgray;
+  border-width: 0.1px;
+  color: white;
+}
+.create_meet_form input[type="datetime-local"] {
+  width: 11rem;
+}
+.google_maps_cont {
+  margin-top: -2rem;
+}
+
+.create_meet_form button {
+  margin: 1rem;
+  width: 7rem;
+  height: 2.5rem;
+  background: none;
+  color: white;
+  border-color: lightgray;
+  border-width: 0.1px;
+  font-weight: 800;
+  font-size: 1rem;
 }

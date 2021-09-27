@@ -1,9 +1,10 @@
 .nav_container {
   position: fixed;
-  height: 50px;
-  background-color: red;
+  height: 60px;
   bottom: 0px;
   left: 0px;
   right: 0px;
   margin-bottom: 0px;
+  background-color: rgba(9, 8, 8, 0.447);
+  backdrop-filter: blur(5px);
 }
