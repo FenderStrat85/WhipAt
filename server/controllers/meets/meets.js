@@ -15,11 +15,14 @@ const createMeet = async (req, res) => {
       meet_location: JSON.stringify(req.body.meet_location),
       meet_date: moment(user.meet_date).format("lll"),
     };
-    console.log(newCar_Meet);
+    // console.log(newCar_Meet);
     //create a new meet
     const newCarMeet = await db.Car_Meets.create(newCar_Meet);
 
+    console.log(newCarMeet);
+
     res.status(201);
+    res.send(newCarMeet);
   } catch (error) {
     console.log(error);
     res.status(500);
@@ -32,7 +35,7 @@ const getMyMeets = async (req, res) => {
     const result = await db.Car_Meets.findAll({
       where: { creator_id: user_id },
     });
-    console.log(result);
+
     res.send(result);
     res.status(200);
   } catch (error) {
@@ -142,11 +145,6 @@ const joinAMeet = async (req, res) => {
       include: db.Car_Meets,
     });
 
-    // //list of joined car meets for this user
-    // const carMeets = result[0].Car_Meets;
-    // console.log("reight before");
-    // console.log(carMeets);
-
     // res.send("list_of_friends_meets");
     res.status(200).end();
   } catch (error) {
@@ -178,6 +176,29 @@ const leaveAMeet = async (req, res) => {
   }
 };
 
+const deleteMeet = async (req, res) => {
+  try {
+    const currentUser = req.user;
+
+    const meet = req.body;
+    console.log("delete");
+    //get meet model
+    const meetInstance = await db.Car_Meets.destroy({
+      where: { _id: meet._id },
+    });
+
+    //remove user from meet
+    // meetInstance.removeUser(currentUser);
+
+    res.send(false);
+    res.status(201);
+  } catch (error) {
+    console.log(error);
+    res.send(true);
+    res.status(500);
+  }
+};
+
 module.exports = {
   createMeet,
   getMyMeets,
@@ -185,4 +206,5 @@ module.exports = {
   getJoinMeets,
   joinAMeet,
   leaveAMeet,
+  deleteMeet,
 };

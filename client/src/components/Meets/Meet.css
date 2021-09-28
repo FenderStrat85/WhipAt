@@ -1,21 +1,40 @@
-.meet_contaner {
+.meet_contaner_outer {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  width: 95%;
-  height: 3rem;
-  padding: 0;
+  width: 100%;
+  height: 4.5rem;
+  padding: 0.4rem;
   background-color: #c9ada7;
   border-radius: 1rem;
   /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px; */
   box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
     rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
 
-  margin: 0.5rem;
+  background-color: rgba(9, 8, 8, 0.447);
+  backdrop-filter: blur(5px);
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
+    rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+
+  color: lightgray;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
-button {
-  font-size: small;
-  border-radius: 0.5rem;
+.meet_contaner_outer button {
+  margin: 0.3rem;
+  width: 4.5rem;
+  height: 2.5rem;
+  background: none;
+  color: white;
+  border-color: lightgray;
+  border-width: 0.1px;
+  /* font-weight: 800; */
+  font-size: 0.8rem;
+  border-radius: 0.4rem;
+}
+
+.meet_contaner p {
+  margin: 0.3rem;
 }

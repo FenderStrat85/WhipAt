@@ -1,8 +1,10 @@
 .nav {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   filter: invert();
+  padding-left: 1.4rem;
+  padding-right: 1.4rem;
 }
 .search img {
   height: 2.8rem;

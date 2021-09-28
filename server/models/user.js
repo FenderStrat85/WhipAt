@@ -37,10 +37,12 @@ module.exports = (sequelize, DataTypes) =>
     follower_count: {
       type: DataTypes.INTEGER,
       allowNull: true,
+      defaultValue: 0,
     },
     following_count: {
       type: DataTypes.INTEGER,
       allowNull: true,
+      defaultValue: 0,
     },
     profile: {
       type: DataTypes.STRING,

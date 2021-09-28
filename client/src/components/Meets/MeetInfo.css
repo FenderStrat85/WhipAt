@@ -1,0 +1,26 @@
+.meet_info_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.meet_info_container h1 {
+  color: lightgray;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.meet_info_container p {
+  background-color: rgba(9, 8, 8, 0.447);
+  backdrop-filter: blur(5px);
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
+    rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+  width: 11rem;
+  height: 3rem;
+  border-radius: 0.4rem;
+  text-align: center;
+  color: lightgray;
+  margin: 1rem;
+}

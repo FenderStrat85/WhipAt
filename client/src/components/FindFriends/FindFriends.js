@@ -8,7 +8,7 @@ export default function FindFriends() {
   console.log(userList, "Friends");
   return (
     <div className="find_friends_cont">
-      <h1>Hi From Friends</h1>
+      <h1>Search Users</h1>
       <div className="search_bar">
         <SearchBar setUserList={setUserList}></SearchBar>
       </div>

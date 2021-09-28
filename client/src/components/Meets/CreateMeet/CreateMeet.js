@@ -33,23 +33,25 @@ export default function CreateMeet() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const { meet_name, meet_date, meet_description } = state;
-    console.log("locaton", location);
-    const newMeet = {
-      meet_name,
-      meet_date,
-      meet_description,
-      meet_location: location,
-    };
-    console.log("newmeet", newMeet);
-
-    //send new meet to db, potentialy do not need to create in store
-
     try {
+      e.preventDefault();
+
+      const { meet_name, meet_date, meet_description } = state;
+      console.log("locaton", location);
+      const newMeet = {
+        meet_name,
+        meet_date,
+        meet_description,
+        meet_location: location,
+      };
+      console.log("newmeet", newMeet);
+
+      //send new meet to db, potentialy do not need to create in store
+
       await apiService.createMeet(newMeet);
+      console.log("before push");
       history.push("/meets");
+      console.log("after push");
     } catch (error) {}
   };
 
@@ -96,8 +98,10 @@ export default function CreateMeet() {
           placeholder="Meet Description"
         />
 
-        <div className="google_maps_cont"></div>
-        <GoogleMaps></GoogleMaps>
+        <div className="google_maps_cont">
+          <GoogleMaps value={true}></GoogleMaps>
+        </div>
+
         <button
           id="create_meet_button"
           type="submit"

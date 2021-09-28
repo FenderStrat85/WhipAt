@@ -13,8 +13,8 @@ const mapContainerStyle = {
   height: "34vh",
 };
 let center = {
-  lat: 25.7617,
   lng: 80.1918,
+  lat: 25.7617,
 };
 const options = {
   // style:
@@ -22,7 +22,7 @@ const options = {
   zoomControl: true,
 };
 
-export default function GoogleMaps(porps) {
+export default function GoogleMaps(props) {
   const dispatch = useDispatch();
 
   const { isLoaded, loadError } = useLoadScript({
@@ -53,9 +53,63 @@ export default function GoogleMaps(porps) {
 
   if (loadError) return "Error loading maps";
   if (!isLoaded) return "Loading Maps";
+
+  const render_search_or_display = (search) => {
+    if (search) {
+      return (
+        <div className="google_maps_container_p">
+          <div className="search_container_g">
+            <Search panTo={panTo}></Search>
+          </div>
+
+          <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            zoom={8}
+            center={center}
+            options={options}
+            onClick={updateMarker}
+            onLoad={onMapLoad}
+          >
+            <Marker
+              position={marker}
+              icon={{
+                url: markerImg,
+                scaledSize: new window.google.maps.Size(35, 35),
+                origin: new window.google.maps.Point(0, 0),
+                anchor: new window.google.maps.Point(15, 15),
+              }}
+            ></Marker>
+          </GoogleMap>
+        </div>
+      );
+    } else {
+      return (
+        <div className="google_maps_container_p">
+          <GoogleMap
+            mapContainerStyle={mapContainerStyle}
+            zoom={14}
+            center={props.center}
+            options={options}
+            onLoad={onMapLoad}
+          >
+            <Marker
+              position={props.center}
+              icon={{
+                url: markerImg,
+                scaledSize: new window.google.maps.Size(35, 35),
+                origin: new window.google.maps.Point(0, 0),
+                anchor: new window.google.maps.Point(15, 15),
+              }}
+            ></Marker>
+          </GoogleMap>
+          ;
+        </div>
+      );
+    }
+  };
   return (
     <div className="google_maps_container_p">
-      <div className="search_container_g">
+      {/* <div className="search_container_g">
         <Search panTo={panTo}></Search>
       </div>
 
@@ -76,7 +130,9 @@ export default function GoogleMaps(porps) {
             anchor: new window.google.maps.Point(15, 15),
           }}
         ></Marker>
-      </GoogleMap>
+      </GoogleMap> */}
+
+      {render_search_or_display(props.value)}
     </div>
   );
 }

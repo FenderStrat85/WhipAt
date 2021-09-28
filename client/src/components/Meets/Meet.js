@@ -30,12 +30,16 @@ export default function Meet(props) {
   };
 
   return (
-    <div className="meet_contaner" onClick={onClickGetMeetInfo}>
-      <p className="meet_d">{state.meet_name}</p>
-      <p className="meet_name">{state.meet_date}</p>
-      <button onClick={() => props.meetButtonAction(props.meetType, state)}>
-        {buttonLabel()}
-      </button>
+    <div className="meet_contaner_outer">
+      <div className="meet_contaner" onClick={onClickGetMeetInfo}>
+        <p className="meet_d">{state.meet_name}</p>
+        <p className="meet_name">{state.meet_date}</p>
+      </div>
+      <div>
+        <button onClick={() => props.meetButtonAction(props.meetType, state)}>
+          {buttonLabel()}
+        </button>
+      </div>
     </div>
   );
 }

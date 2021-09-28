@@ -73,6 +73,18 @@ apiService.leaveAMeet = async (meet) => {
     .catch((err) => console.log(err));
 };
 
+apiService.deleteMyMeet = async (meet) => {
+  return fetch(`${BASE_URL}/delete/meet`, {
+    method: "DELETE",
+    credentials: "include",
+    mode: "cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(meet),
+  })
+    .then((res) => res.json())
+    .catch((err) => console.log(err));
+};
+
 apiService.searchUsers = async (search) => {
   return fetch(`${BASE_URL}/search/users`, {
     method: "POST",

@@ -55,7 +55,20 @@ const addFriend = async (req, res) => {
       follows_user_name: friend,
       user_id: currentUser_id,
     });
-    console.log(result);
+
+    //increase user following count
+    const incUser = await db.User.increment("following_count", {
+      by: 1,
+      where: { _id: currentUser_id },
+    });
+    //add increase friend follower count
+    const incFriend = await db.User.increment("follower_count", {
+      by: 1,
+      where: { user_name: friend },
+    });
+
+    console.log("inc", incUser);
+    console.log("dec", incFriend);
     res.send(true);
     res.status(201);
   } catch (error) {
@@ -83,7 +96,24 @@ const removeFriend = async (req, res) => {
 
     //destory friendship
     await friendShip.destroy();
-    // .then((res) => console.log("destroyed", res));
+
+    //decrease user following count
+    const decUser = await db.User.increment(
+      { following_count: -1 },
+      {
+        where: { _id: currentUser_id },
+      }
+    );
+    //add decrease friend follower count
+    const decFriend = await db.User.increment(
+      { follower_count: -1 },
+      {
+        where: { user_name: friend },
+      }
+    );
+    console.log(friend);
+    console.log("inc", decUser);
+    console.log("dec", decFriend);
 
     res.send(false);
     res.status(201);
