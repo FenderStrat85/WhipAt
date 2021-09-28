@@ -12,6 +12,7 @@ const initialState = {
   year: "",
   make: "",
   model: "",
+  profile: "",
 };
 export default function Register() {
   const [state, setState] = useState(initialState);
@@ -29,8 +30,17 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { user_name, password, user_email, year, make, model } = state;
-    const newUser = { user_name, password, user_email, year, make, model };
+    const { user_name, password, user_email, year, make, model, profile } =
+      state;
+    const newUser = {
+      user_name,
+      password,
+      user_email,
+      year,
+      make,
+      model,
+      profile,
+    };
 
     try {
       const user = await apiService.register(newUser);
@@ -49,7 +59,8 @@ export default function Register() {
       !state.user_email ||
       !state.year ||
       !state.make ||
-      !state.model
+      !state.model ||
+      !state.profile
     );
   };
 
@@ -82,6 +93,14 @@ export default function Register() {
           value={state.user_email}
           onChange={handleChange}
           placeholder="Email"
+        />
+        <input
+          type="text"
+          name="profile"
+          id="profile"
+          value={state.profile}
+          onChange={handleChange}
+          placeholder="Profile Picture link"
         />
 
         <select name="year" id="year" onChange={handleChange}>

@@ -6,7 +6,6 @@ const session = require("express-session");
 const router = require("./router");
 const db = require("./models/db");
 
-//TODO: set up .env file
 const SERVER_PORT = process.env.SERVER_PORT || 3001;
 const SECRET = process.env.SECRET || "catnip crazy";
 

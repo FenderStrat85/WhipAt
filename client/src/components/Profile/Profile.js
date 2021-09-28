@@ -1,11 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import "./Profile.css";
 
 export default function Profile() {
-  // const [user, setUser] = useState({});
-  let history = useHistory();
   const user = useSelector((state) => state.loggedUser);
   console.log("profile", user);
   return (
@@ -14,7 +11,10 @@ export default function Profile() {
       <div className="user_profile_info">
         <div className="user_profile_picture">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7NjPoc-G8OFe521tFkR07rlyIg8XdKacNbA&usqp=CAU"
+            src={
+              user.profile ||
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7NjPoc-G8OFe521tFkR07rlyIg8XdKacNbA&usqp=CAU"
+            }
             alt="profile"
           />
         </div>
