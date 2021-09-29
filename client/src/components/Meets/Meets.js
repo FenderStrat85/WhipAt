@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import { useHistory } from "react-router";
 import MeetsList from "./Meets_List";
 import "./Meets.css";
 
 export default function Meets() {
   const history = useHistory();
-  const user = useSelector((state) => state.loggedUser);
   const myMeets = "my";
   const joinedMeets = "joined";
   return (

@@ -71,7 +71,6 @@ const mapInfo = (state = { lat: 0, lng: 0 }, action) => {
       lat: action.payload.lat,
       lng: action.payload.lng,
     };
-    console.log("newState", newState);
     return newState;
   }
 

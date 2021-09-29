@@ -5,7 +5,6 @@ import FriendBanner from "./FriendBanner";
 
 export default function FindFriends() {
   const [userList, setUserList] = useState([]);
-  console.log(userList, "Friends");
   return (
     <div className="find_friends_cont">
       <h1>Search Users</h1>

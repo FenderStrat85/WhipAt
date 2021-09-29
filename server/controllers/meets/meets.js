@@ -1,30 +1,29 @@
-"use strict";
-const { v4: uuidv4 } = require("uuid");
-const db = require("../../models/db");
-const { Op } = db;
-const moment = require("moment");
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable camelcase */
+const { v4: uuidv4 } = require('uuid');
+const moment = require('moment');
+const db = require('../../models/db');
 
 const createMeet = async (req, res) => {
   try {
-    const user = req.user;
+    const { user } = req;
 
     const newCar_Meet = {
       ...req.body,
       creator_id: user._id,
       _id: uuidv4(),
       meet_location: JSON.stringify(req.body.meet_location),
-      meet_date: moment(user.meet_date).format("lll"),
+      meet_date: moment(user.meet_date).format('lll'),
     };
     // console.log(newCar_Meet);
-    //create a new meet
+    // create a new meet
     const newCarMeet = await db.Car_Meets.create(newCar_Meet);
-
-    console.log(newCarMeet);
 
     res.status(201);
     res.send(newCarMeet);
   } catch (error) {
-    console.log(error);
     res.status(500);
   }
 };
@@ -44,15 +43,13 @@ const getMyMeets = async (req, res) => {
 };
 const getJoinedMeets = async (req, res) => {
   try {
-    const _id = req.user._id;
-    // console.log("JoinedMeets");
+    const { _id } = req.user;
     const result = await db.User.findAll({
-      where: { _id: _id },
+      where: { _id },
       include: db.Car_Meets,
     });
 
     const carMeets = result[0].Car_Meets;
-    // console.log(carMeets);
     res.send(carMeets);
     res.status(200);
   } catch (error) {
@@ -65,51 +62,35 @@ const getJoinMeets = async (req, res) => {
   try {
     const user_id = req.user._id;
 
-    //get list of user followers
+    // get list of user followers
     const user_friends_list = await db.Following.findAll({
       where: { user_id },
     });
 
-    // console.log("friends LIst", user_friends_list);
-
-    //get a list of the requsters joined meets
-    //we will use this to not render already joined meets
+    // get a list of the requsters joined meets
+    // we will use this to not render already joined meets
     const result = await db.User.findAll({
       where: { _id: user_id },
       include: db.Car_Meets,
     });
     const joinedCarMeets = result[0].Car_Meets;
 
-    // console.log("joined car meet", joinedCarMeets);
-
     const list_of_friends_meets = [];
 
-    //get the User table information from each friendList entry
-    for (let friend of user_friends_list) {
+    // get the User table information from each friendList entry
+    for (const friend of user_friends_list) {
       const user = await db.User.findOne({
         where: { user_name: friend.dataValues.follows_user_name },
       });
-      // console.log("user", user);
 
-      //use user information to get  meets created by the friend
+      // use user information to get  meets created by the friend
       const meets = await db.Car_Meets.findAll({
         where: { creator_id: user.dataValues._id },
       });
-      // console.log("meets", meets);
-      // console.log("joinedCarMeets>>>>", joinedCarMeets.length);
+
       if (joinedCarMeets.length < 1) {
-        console.log("all meets");
         list_of_friends_meets.push(...meets);
       } else {
-        console.log(
-          "allMeets",
-          meets.map((meet) => meet.dataValues._id)
-        );
-        console.log(
-          "All Joined Meets",
-          joinedCarMeets.map((meet) => meet.dataValues._id)
-        );
-
         // const allMeets = meets.map((meet) => meet.dataValues._id);
         const allJoined = joinedCarMeets.map((meet) => meet.dataValues._id);
 
@@ -125,7 +106,6 @@ const getJoinMeets = async (req, res) => {
     res.send(list_of_friends_meets);
     res.status(200);
   } catch (error) {
-    console.log(error);
     res.status(500);
   }
 };
@@ -139,16 +119,13 @@ const joinAMeet = async (req, res) => {
     });
     await getJoinedMeet.addUser(user_id);
 
-    // console.log("JoinedMeets");
-    const result = await db.User.findAll({
+    await db.User.findAll({
       where: { _id: user_id },
       include: db.Car_Meets,
     });
 
-    // res.send("list_of_friends_meets");
     res.status(200).end();
   } catch (error) {
-    console.log(error);
     res.status(500);
   }
 };
@@ -159,18 +136,17 @@ const leaveAMeet = async (req, res) => {
 
     const meet = req.body;
 
-    //get meet model
+    // get meet model
     const meetInstance = await db.Car_Meets.findOne({
       where: { _id: meet._id },
     });
 
-    //remove user from meet
+    // remove user from meet
     meetInstance.removeUser(currentUser);
 
     res.send(false);
     res.status(201);
   } catch (error) {
-    console.log(error);
     res.send(true);
     res.status(500);
   }
@@ -178,22 +154,19 @@ const leaveAMeet = async (req, res) => {
 
 const deleteMeet = async (req, res) => {
   try {
-    const currentUser = req.user;
-
     const meet = req.body;
-    console.log("delete");
-    //get meet model
-    const meetInstance = await db.Car_Meets.destroy({
+
+    // get meet model
+    await db.Car_Meets.destroy({
       where: { _id: meet._id },
     });
 
-    //remove user from meet
+    // remove user from meet
     // meetInstance.removeUser(currentUser);
 
     res.send(false);
     res.status(201);
   } catch (error) {
-    console.log(error);
     res.send(true);
     res.status(500);
   }

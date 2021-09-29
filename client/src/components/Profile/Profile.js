@@ -4,7 +4,6 @@ import "./Profile.css";
 
 export default function Profile() {
   const user = useSelector((state) => state.loggedUser);
-  console.log("profile", user);
   return (
     <div className="user_profile">
       <h1>{user.user_name || "no user"}</h1>

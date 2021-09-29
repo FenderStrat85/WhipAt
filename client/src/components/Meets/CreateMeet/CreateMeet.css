@@ -29,6 +29,10 @@
 .create_meet_form input[type="datetime-local"] {
   width: 11rem;
 }
+.create_meet_form input[type="textarea"] {
+  height: 4rem;
+  margin-top: -0.3rem;
+}
 .google_maps_cont {
   margin-top: -2rem;
 }
@@ -41,6 +45,22 @@
   color: white;
   border-color: lightgray;
   border-width: 0.1px;
+  border-radius: 0.4rem;
   font-weight: 800;
   font-size: 1rem;
+}
+
+input[type="textarea"]::placeholder {
+  /* Firefox, Chrome, Opera */
+  color: white;
+}
+
+input[type="textarea"]:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: white;
+}
+
+input[type="textarea"]::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: white;
 }

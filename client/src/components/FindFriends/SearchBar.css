@@ -2,8 +2,30 @@
   width: 12rem;
   height: 2.3rem;
 }
+.input {
+  width: 100vw;
+}
 .input button {
-  margin-left: 0.3rem;
-  width: 5rem;
-  height: 2.3rem;
+  margin: 1rem;
+  width: 4rem;
+  height: 2.5rem;
+  background: none;
+  color: white;
+  border-color: lightgray;
+  border-width: 0.1px;
+  font-weight: 800;
+  font-size: 1rem;
+  border-radius: 0.4rem;
+}
+
+.input input {
+  margin: 1rem;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background: none;
+  border-color: lightgray;
+  border-width: 0.1px;
+  color: white;
+  width: 14rem;
 }

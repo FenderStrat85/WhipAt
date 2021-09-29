@@ -33,7 +33,6 @@ export default function GoogleMaps(props) {
 
   //on map click the state gets updated
   const updateMarker = async (event) => {
-    console.log(event);
     setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
     dispatch(update_map(marker));
   };
@@ -109,29 +108,6 @@ export default function GoogleMaps(props) {
   };
   return (
     <div className="google_maps_container_p">
-      {/* <div className="search_container_g">
-        <Search panTo={panTo}></Search>
-      </div>
-
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={8}
-        center={center}
-        options={options}
-        onClick={updateMarker}
-        onLoad={onMapLoad}
-      >
-        <Marker
-          position={marker}
-          icon={{
-            url: markerImg,
-            scaledSize: new window.google.maps.Size(35, 35),
-            origin: new window.google.maps.Point(0, 0),
-            anchor: new window.google.maps.Point(15, 15),
-          }}
-        ></Marker>
-      </GoogleMap> */}
-
       {render_search_or_display(props.value)}
     </div>
   );

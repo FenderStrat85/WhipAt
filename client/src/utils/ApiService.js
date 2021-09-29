@@ -11,7 +11,7 @@ apiService.register = async (user) => {
     body: JSON.stringify(user),
   })
     .then((res) => res.json())
-    .catch((err) => console.log(err));
+    .catch();
 };
 
 apiService.login = async (user) => {
@@ -23,7 +23,7 @@ apiService.login = async (user) => {
     body: JSON.stringify(user),
   })
     .then((res) => res.json())
-    .catch((err) => console.log(err));
+    .catch();
 };
 
 apiService.createMeet = async (meet) => {
@@ -35,7 +35,7 @@ apiService.createMeet = async (meet) => {
     body: JSON.stringify(meet),
   })
     .then((res) => res.json())
-    .catch((err) => console.log(err));
+    .catch();
 };
 
 apiService.getMeets = async (meetType) => {
@@ -46,7 +46,7 @@ apiService.getMeets = async (meetType) => {
     headers: { "Content-Type": "application/json" },
   })
     .then((res) => res.json())
-    .catch((err) => console.log(err));
+    .catch();
 };
 
 apiService.joinAMeet = async (meet) => {
@@ -57,8 +57,7 @@ apiService.joinAMeet = async (meet) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(meet),
   })
-    // .then((res) => res.json())
-    .catch((err) => console.log(err));
+    .catch();
 };
 
 apiService.leaveAMeet = async (meet) => {
@@ -70,7 +69,7 @@ apiService.leaveAMeet = async (meet) => {
     body: JSON.stringify(meet),
   })
     .then((res) => res.json())
-    .catch((err) => console.log(err));
+    .catch();
 };
 
 apiService.deleteMyMeet = async (meet) => {
@@ -82,7 +81,7 @@ apiService.deleteMyMeet = async (meet) => {
     body: JSON.stringify(meet),
   })
     .then((res) => res.json())
-    .catch((err) => console.log(err));
+    .catch();
 };
 
 apiService.searchUsers = async (search) => {
@@ -94,7 +93,7 @@ apiService.searchUsers = async (search) => {
     body: JSON.stringify(search),
   })
     .then((res) => res.json())
-    .catch((err) => console.log(err));
+    .catch();
 };
 
 apiService.addFriend = async (friend) => {
@@ -106,7 +105,7 @@ apiService.addFriend = async (friend) => {
     body: JSON.stringify(friend),
   })
     .then((res) => res.json())
-    .catch((err) => console.log(err));
+    .catch();
 };
 
 apiService.removeFriend = async (friend) => {
@@ -118,7 +117,7 @@ apiService.removeFriend = async (friend) => {
     body: JSON.stringify(friend),
   })
     .then((res) => res.json())
-    .catch((err) => console.log(err));
+    .catch();
 };
 
 export default apiService;

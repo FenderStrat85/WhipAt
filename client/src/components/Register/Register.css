@@ -18,6 +18,7 @@
   color: white;
   border-color: lightgray;
   border-width: 0.1px;
+  border-radius: 0.4rem;
   font-weight: 800;
   font-size: 1rem;
 }

@@ -56,7 +56,7 @@ export default function Login() {
 
   return (
     <div className="login_cont">
-      <h1>Login</h1>
+      <h1>WhipAt Login</h1>
       <form className="form_login" onSubmit={handleSubmit}>
         <input
           type="text"
@@ -80,7 +80,7 @@ export default function Login() {
           Login
         </button>
       </form>
-      <div class="create_account">
+      <div className="create_account">
         <Link to="/register">Create Account</Link>
       </div>
     </div>

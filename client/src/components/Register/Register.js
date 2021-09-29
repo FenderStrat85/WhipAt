@@ -48,7 +48,6 @@ export default function Register() {
       //redirect to meets page
       history.push("/meets");
     } catch (error) {
-      console.log(error);
     }
   };
 

@@ -1,5 +1,5 @@
 //Google places auto complete
-import React, { useCallback } from "react";
+import React from "react";
 
 import { useLoadScript } from "@react-google-maps/api";
 import usePlacesAutocomplete, {
@@ -47,7 +47,7 @@ export default function Search(props) {
 
             props.panTo({ lat, lng });
           } catch (error) {
-            console.log(error);
+          
           }
         }}
       >

@@ -13,8 +13,6 @@ export default function MeetInfo() {
     lat: meet_location.lat,
   };
 
-  console.log(meet_location);
-
   return (
     <div className="meet_info_container">
       <h1>{meet.meet_name}</h1>
