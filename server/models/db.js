@@ -7,8 +7,10 @@ const { Op } = require('sequelize');
 const db = {};
 
 // TODO: need to set up .env
-const DB_USERNAME = process.env.DB_USERNAME || 'tempadmin';
-const DB_PASSWORD = process.env.DB_PASSWORD || 'nimdapmet';
+// username & password from Adriano: tempadmin & nimdapmet
+// reset to postgres defaults
+const DB_USERNAME = process.env.DB_USERNAME || 'postgres';
+const DB_PASSWORD = process.env.DB_PASSWORD || '1234';
 const DB_PORT = process.env.DB_PORT || 5432;
 
 const sequelize = new Sequelize({
