@@ -26,12 +26,33 @@ describe('User logins', () => {
   app.use(router);
   const request = supertest(app)
 
-  const user = {
-    user_name: 'test',
-    password: '123'
-  }
+  afterEach(async () => {
+    const user = await db.User.findOne({ where: { user_name: 'banjo' } })
+    if (!user) return
+    await user.destroy();
+  })
+
+  it('user should be able to register', async () => {
+    const newUser = {
+      _id: '',
+      user_name: 'banjo',
+      password: '1234',
+      user_email: 'banjo@banjo.com',
+      make: 'Vauxhall',
+      model: 'Corsa',
+      year: '1995',
+    }
+
+    const result = await request.post('/register')
+      .send(newUser)
+    expect(result.body.user_name).toBe(newUser.user_name);
+  })
 
   it('user should be able to login', async () => {
+    const user = {
+      user_name: 'test',
+      password: '123'
+    }
 
     const result = await request.post('/login')
       .send(user)
