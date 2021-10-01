@@ -40,8 +40,9 @@ const login = async (req, res) => {
   try {
     const { user_name, password } = req.body;
     const user = await db.User.findOne({ where: { user_name } });
+
     // check if provided password is true or false
-    const passValidation = bcrypt.compare(password, user.password);
+    const passValidation = await bcrypt.compare(password, user.password);
 
     if (!passValidation) throw new Error();
     req.session.sid = user._id;
@@ -58,7 +59,7 @@ const logout = async (req, res) => {
     if (error) {
       res.status(500);
     } else {
-      res.cleasrCookies('sid');
+      res.clearCookies('sid');
       res.sendStatus(200);
     }
   });
