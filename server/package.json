@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,15 +20,18 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "fs": "^0.0.1-security",
+    "jest": "^27.2.4",
     "moment": "^2.29.1",
     "nodemon": "^2.0.13",
     "path": "^0.12.7",
     "pg": "^8.7.1",
     "react-router-dom": "^5.3.0",
     "sequelize": "^6.6.5",
+    "supertest": "^6.1.6",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
 const { Op } = require('sequelize');
-
+require('dotenv').config();
 const db = {};
 
 // TODO: need to set up .env
@@ -14,7 +14,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD || '1234';
 const DB_PORT = process.env.DB_PORT || 5432;
 
 const sequelize = new Sequelize({
-  database: 'whipat',
+  database: process.env.CURRENT_OPERATING_MODE == 'test' ? 'whipat-test' : 'whipat',
   username: DB_USERNAME,
   password: DB_PASSWORD,
   host: '127.0.0.1',

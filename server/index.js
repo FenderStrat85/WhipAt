@@ -3,6 +3,7 @@ const cors = require('cors');
 const session = require('express-session');
 const router = require('./router');
 const db = require('./models/db');
+require('dotenv').config()
 
 const SERVER_PORT = process.env.SERVER_PORT || 3001;
 const SECRET = process.env.SECRET || 'catnip crazy';
@@ -49,3 +50,5 @@ try {
 } catch (err) {
   console.log(`Server start failed ${err}`);
 }
+
+module.exports = app;
