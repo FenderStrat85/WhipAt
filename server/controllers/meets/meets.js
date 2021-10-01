@@ -7,9 +7,10 @@ const moment = require('moment');
 const db = require('../../models/db');
 
 const createMeet = async (req, res) => {
+
   try {
     const { user } = req;
-
+    ;
     const newCar_Meet = {
       ...req.body,
       creator_id: user._id,
@@ -17,7 +18,7 @@ const createMeet = async (req, res) => {
       meet_location: JSON.stringify(req.body.meet_location),
       meet_date: moment(user.meet_date).format('lll'),
     };
-    // console.log(newCar_Meet);
+
     // create a new meet
     const newCarMeet = await db.Car_Meets.create(newCar_Meet);
 

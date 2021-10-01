@@ -3,7 +3,6 @@ const router = require('../../router');
 const session = require('express-session');
 const supertest = require('supertest');
 const db = require('../../models/db');
-const { login, register } = require('../auth/auth');
 
 describe('User logins', () => {
 
@@ -53,7 +52,6 @@ describe('User logins', () => {
       user_name: 'test',
       password: '123'
     }
-
     const result = await request.post('/login')
       .send(user)
     expect(result.body.user_name).toBe(user.user_name)

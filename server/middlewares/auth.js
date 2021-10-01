@@ -2,7 +2,7 @@ const db = require('../models/db');
 
 // eslint-disable-next-line consistent-return
 
-const authMiddleware = async (req, res, next) => {
+const authMiddleWare = async (req, res, next) => {
   try {
     // sid is the session id
     const { sid } = req.session;
@@ -10,7 +10,7 @@ const authMiddleware = async (req, res, next) => {
     // console.log(user);
     if (!user) throw new Error();
 
-    console.log(JSON.stringify(user), 'user');
+    // console.log(JSON.stringify(user), 'user');
     req.user = user;
     next();
   } catch (error) {
@@ -18,4 +18,4 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+module.exports = authMiddleWare;
