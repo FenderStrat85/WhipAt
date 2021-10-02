@@ -35,8 +35,8 @@ describe('Login component', () => {
 
   test('Should call login function with the correct credentials', async () => {
 
-    const login = jest.fn();
     const credentials = { password: "123", user_name: "Test" }
+    const mockLogin = jest.spyOn(apiService, 'login')
     render(<Provider store={store}>
       app = shallow(
       <Router>
@@ -51,6 +51,6 @@ describe('Login component', () => {
     userEvent.type(passwordInput, '123');
 
     await userEvent.click(submitButton);
-    expect(login).toHaveBeenCalledWith(credentials);
+    expect(mockLogin).toHaveBeenCalledWith(credentials);
   })
 })
