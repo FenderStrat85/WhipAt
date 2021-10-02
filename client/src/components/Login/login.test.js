@@ -7,27 +7,38 @@ import { BrowserRouter as Router, Link } from 'react-router-dom';
 import apiService from '../../utils/ApiService';
 import userEvent from '@testing-library/user-event';
 
-console.log(apiService.login, 'login');
+const MockLogin = (props) => {
+  return (<Provider store={props.store}>
+    app = shallow(
+    <Router>
+      <Login />
+    </Router>);
+  </Provider>)
+}
 
 describe('Login component', () => {
-
   const getState = jest.fn()
   let store = createStore(
     reducers,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
 
-  jest.mock('../../utils/ApiService', () => ({
-    login: () => ({ user_name: 'Test', password: '123' })
-  }))
+  //Mock fetch with this:
+  // apiService.login = jest.fn().mockImplementation(() => { });
+
+  // jest.mock('node-fetch')
+  // mocked(fetch).mockImplementation(() => {
+  //   return Promise.resolve({
+  //     json: () => Promise.resolve("Hello world")
+  //   } as Response)
+  // })
+
+  const credentials = { password: "123", user_name: "Test" }
 
   test('Screen should should render correctly', () => {
-    render(<Provider store={store}>
-      app = shallow(
-      <Router>
-        <Login />
-      </Router>);
-    </Provider>);
+
+    render(<MockLogin store={store} />);
+
     screen.getByPlaceholderText(/Password/);
     screen.getByPlaceholderText(/Username/);
     screen.getByRole('button', { name: 'Login' });
@@ -35,14 +46,11 @@ describe('Login component', () => {
 
   test('Should call login function with the correct credentials', async () => {
 
-    const credentials = { password: "123", user_name: "Test" }
-    const mockLogin = jest.spyOn(apiService, 'login')
-    render(<Provider store={store}>
-      app = shallow(
-      <Router>
-        <Login />
-      </Router>);
-    </Provider>);
+    //spyOn (obj, 'method inside object)
+    const spyLogin = jest.spyOn(apiService, 'login')
+    console.log(spyLogin);
+    render(<MockLogin store={store} />);
+
     const userNameInput = screen.getByPlaceholderText(/Username/);
     const passwordInput = screen.getByPlaceholderText(/Password/);
     const submitButton = screen.getByRole('button', { name: 'Login' });
@@ -51,6 +59,6 @@ describe('Login component', () => {
     userEvent.type(passwordInput, '123');
 
     await userEvent.click(submitButton);
-    expect(mockLogin).toHaveBeenCalledWith(credentials);
+    expect(spyLogin).toHaveBeenCalledWith(credentials);
   })
 })

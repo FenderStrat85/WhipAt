@@ -15,7 +15,6 @@ apiService.register = async (user) => {
 };
 
 apiService.login = async (user) => {
-  console.log(user, 'login');
   return fetch(`${BASE_URL}/login`, {
     method: "POST",
     credentials: "include",
