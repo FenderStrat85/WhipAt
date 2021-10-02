@@ -4,8 +4,6 @@ const router = require('express').Router();
 //TEST
 const authMiddleware = require('./middlewares/mock.auth');
 
-// const authMiddleware = process.env.CURRENT_OPERATING_MODE === 'test' ? require('./middlewares/mock.auth') : require('./middlewares/auth')
-
 const { register, login, logout } = require('./controllers/auth/auth');
 const {
   createMeet,
