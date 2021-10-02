@@ -7,9 +7,11 @@ const moment = require('moment');
 const db = require('../../models/db');
 
 const createMeet = async (req, res) => {
-
+  // console.log('res object', res)
   try {
     const { user } = req;
+    // console.log('user inside createMeet',user)
+    // console.log('req.body inside createMeet', req.body)
     ;
     const newCar_Meet = {
       ...req.body,
@@ -18,13 +20,12 @@ const createMeet = async (req, res) => {
       meet_location: JSON.stringify(req.body.meet_location),
       meet_date: moment(user.meet_date).format('lll'),
     };
-
     // create a new meet
     const newCarMeet = await db.Car_Meets.create(newCar_Meet);
-
     res.status(201);
     res.send(newCarMeet);
   } catch (error) {
+    console.log(error);
     res.status(500);
   }
 };

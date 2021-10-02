@@ -48,6 +48,8 @@ describe('User logins', () => {
   })
 
   it('user should be able to login', async () => {
+    //need to ensure that this user is created in the database before
+    //carrying out this test
     const user = {
       user_name: 'test',
       password: '123'
