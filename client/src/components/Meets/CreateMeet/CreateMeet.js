@@ -47,7 +47,7 @@ export default function CreateMeet() {
       
 
       //send new meet to db, potentialy do not need to create in store
-
+      console.log('create meet file')
       await apiService.createMeet(newMeet);      
       history.push("/meets");
     } catch (error) {}

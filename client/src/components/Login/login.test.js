@@ -17,7 +17,7 @@ const MockLogin = (props) => {
 }
 
 describe('Login component', () => {
-  const getState = jest.fn()
+  // const getState = jest.fn()
   let store = createStore(
     reducers,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -48,7 +48,7 @@ describe('Login component', () => {
 
     //spyOn (obj, 'method inside object)
     const spyLogin = jest.spyOn(apiService, 'login')
-    console.log(spyLogin);
+    
     render(<MockLogin store={store} />);
 
     const userNameInput = screen.getByPlaceholderText(/Username/);

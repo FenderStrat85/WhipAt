@@ -25,12 +25,15 @@ describe('CreateMeet Component', () => {
 
   const credentials = {
     meet_name: 'test meet',
-    meet_date: '1/10/21',
+    meet_date: "",
     meet_description: 'first meet',
-    meet_location: 'location'
+    meet_location: {
+      lat: 0,
+      lng: 0
+    }
   }
 
-  test('CreateMeet screen shouldn render correctly', () => {
+  test('CreateMeet screen should render correctly', () => {
     render(<MockCreateMeet store={store} />)
 
     screen.getAllByPlaceholderText(/Meet Name/);
@@ -43,18 +46,20 @@ describe('CreateMeet Component', () => {
 
     const spyCreateMeet = jest.spyOn(apiService, 'createMeet')
     render(<MockCreateMeet store={store} />)
+   
 
-    console.log(spyCreateMeet, 'SPY MEET');
     const meetNameInput = screen.getByPlaceholderText(/Meet Name/)
     const meetDateInput = screen.getByPlaceholderText(/Meet Date/)
     const meetDescriptionInput = screen.getByPlaceholderText(/Meet Description/)
     // const meetLocationInput = screen.getByPlaceholderText(/Meet Location/)
 
-
+    //form in create meets is set to disabled so it the function isn't called.
+    //Need to find a way to disable this
     const submitButton = screen.getByRole('button', { name: 'Create Meet' })
+    
 
     userEvent.type(meetNameInput, 'test meet')
-    userEvent.type(meetDateInput, '1/10/21')
+    userEvent.type(meetDateInput, '2021-10-01-T19:30')
     userEvent.type(meetDescriptionInput, 'first meet')
     // userEvent.type(meetLocationInput, 'location')
 
