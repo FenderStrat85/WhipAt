@@ -1,4 +1,4 @@
-const express = require('express');
+import express, { Request, Response, NextFunction } from 'express';
 const cors = require('cors');
 const session = require('express-session');
 const router = require('./router');
@@ -35,7 +35,7 @@ app.use(
 
 app.use(router);
 // return 404 for unspecified routes
-app.get('*', (req: any, res: any) => {
+app.get('*', (req: Request, res: Response) => {
   res.status(404);
 });
 
