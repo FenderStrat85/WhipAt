@@ -35,7 +35,7 @@ app.use(
 
 app.use(router);
 // return 404 for unspecified routes
-app.get('*', (req, res) => {
+app.get('*', (req: any, res: any) => {
   res.status(404);
 });
 
