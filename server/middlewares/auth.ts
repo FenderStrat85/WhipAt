@@ -5,6 +5,7 @@ import { Request, Response, NextFunction } from 'express';
 //BUT the instance of session is not defined, so we need to define it below.
 interface Session {
   name: 'sid'
+  sid: string
 }
 
 //The interface below is not currently needed.
@@ -18,9 +19,14 @@ const authMiddleWare = async (req: any, res: Response, next: NextFunction) => {
   try {
     // sid is the session id
     //sid is an instance of the session instance declared above.
-    const sid: Session = req.session;
+    console.log(req.body, 'REQUEST BODY');
+
+    const sid: string = req.session.sid;
+    console.log(typeof sid, 'SID');
+
     const user = await db.User.findByPk(sid);
     // console.log(user);
+    console.log(user, 'USER');
     if (!user) throw new Error();
 
     //setting req to any rather than an instance of Request as done in index.ts means that interfaces can be added.
