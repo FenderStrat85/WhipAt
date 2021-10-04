@@ -36,7 +36,7 @@ const register = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
+const login = async (req: any, res: Response) => {
   try {
     const { user_name, password } = req.body;
     const user = await db.User.findOne({ where: { user_name } });

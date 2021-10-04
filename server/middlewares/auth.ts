@@ -8,7 +8,8 @@ interface Session {
   sid: string
 }
 
-//The interface below is not currently needed.
+//Session no used as the SID is a string. Destructing does not seem to work in TS.
+//So need to access SID through req.session.sid that is added when a user logs in or registers
 
 
 const db = require('../models/db');
@@ -18,7 +19,7 @@ const db = require('../models/db');
 const authMiddleWare = async (req: any, res: Response, next: NextFunction) => {
   try {
     // sid is the session id
-    //sid is an instance of the session instance declared above.
+    //sid is of type string and already exists on the req.session interface.
     console.log(req.body, 'REQUEST BODY');
 
     const sid: string = req.session.sid;
