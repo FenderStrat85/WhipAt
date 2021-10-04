@@ -1,6 +1,10 @@
 import express, { Request, Response, NextFunction } from 'express';
+// interface SIDRequest extends express.Request {
+//   session: any;
+// }
 const cors = require('cors');
-const session = require('express-session');
+const session = require('express-session')
+
 const router = require('./router');
 const db = require('./models/db');
 require('dotenv').config()
@@ -17,6 +21,7 @@ const corsConfig = {
 
 const app = express();
 app.use(cors(corsConfig));
+
 app.use(express.json());
 app.use(
   session({
