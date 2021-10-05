@@ -19,19 +19,23 @@ export default function Login() {
   let history = useHistory();
 
   //update private state on input change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setState((prevState) => ({
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+
+    const name = event.currentTarget.name
+    const value = event.currentTarget.value
+
+    setState(prevState => ({
       ...prevState,
       [name]: value,
     }));
   };
   //api call and update store on input submit
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
 
     const { user_name, password } = state;
-
+    console.log("user_name", user_name)
+    console.log("password", password)
     const newUser = { user_name, password };
     try {
       const user = await apiService.login(newUser);
