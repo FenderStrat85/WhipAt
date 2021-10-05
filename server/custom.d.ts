@@ -13,3 +13,9 @@ declare namespace Express {
     user: User
   }
 }
+
+declare module 'express-session' {
+  export interface SessionData {
+    sid: string;
+  }
+}
