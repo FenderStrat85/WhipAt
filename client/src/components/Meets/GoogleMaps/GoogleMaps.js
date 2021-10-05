@@ -54,61 +54,107 @@ export default function GoogleMaps (props) {
   if (!isLoaded) return <p>"Loading Maps"</p>;
 
   const render_search_or_display = (search) => {
-    if (search) {
-      return (
-        <div className="google_maps_container_p">
-          <div className="search_container_g">
-            <Search panTo={panTo}></Search>
-          </div>
 
-          <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            zoom={8}
-            center={center}
-            options={options}
-            onClick={updateMarker}
-            onLoad={onMapLoad}
-          >
-            <Marker
-              position={marker}
-              icon={{
-                url: markerImg,
-                scaledSize: new window.google.maps.Size(35, 35),
-                origin: new window.google.maps.Point(0, 0),
-                anchor: new window.google.maps.Point(15, 15),
-              }}
-            />
-          </GoogleMap>
-        </div>
-      );
-    } else {
-      return (
-        <div className="google_maps_container_p">
-          <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            zoom={14}
-            center={props.center}
-            options={options}
-            onLoad={onMapLoad}
-          >
-            <Marker
-              position={props.center}
-              icon={{
-                url: markerImg,
-                scaledSize: new window.google.maps.Size(35, 35),
-                origin: new window.google.maps.Point(0, 0),
-                anchor: new window.google.maps.Point(15, 15),
-              }}
-            />
-          </GoogleMap>
-          ;
-        </div>
-      );
+    const mapOptions = {
+      mapContainerStyle,
+      zoom: 14,
+      center,
+      options,
+      onLoad: onMapLoad,
+      onClick
     }
-  };
-  return (
-    <div className="google_maps_container_p">
-      {render_search_or_display(props.value)}
-    </div>
-  );
+    const markerOptions = {
+      position: props.center,
+      icon: {
+        url: markerImg,
+        scaledSize: new window.google.maps.Size(35, 35),
+        origin: new window.google.maps.Point(0, 0),
+        anchor: new window.google.maps.Point(15, 15),
+      }
+    }
+
+    if (search) {
+      mapOptions.mapContainerStyle = mapContainerStyle
+      mapOptions.zoom = 8
+      mapOptions.center = center
+      mapOptions.options = options
+      mapOptions.onClick = updateMarker
+    } else {
+      mapOptions.mapContainerStyle = mapContainerStyle
+      mapOptions.zoom = 14
+      mapOptions.center = props.center
+      mapOptions.options = options
+      mapOptions.onClick = updateMarker
+    }
+
+
+    // if (search) {
+    return (
+      <div className="google_maps_container_p">
+        <div className="search_container_g">
+          <Search panTo={panTo}></Search>
+        </div>
+        <GoogleMap {...mapOptions}>
+          <Marker {...markerOptions} />
+        </GoogleMap>
+
+      </div>
+
+    )
+    // }
+
+
+
+    /* <GoogleMap
+          mapContainerStyle={mapContainerStyle}
+          zoom={8}
+          center={center}
+          options={options}
+          onClick={updateMarker}
+          onLoad={onMapLoad}
+        >
+          <Marker
+            position={marker}
+            icon={{
+              url: markerImg,
+              scaledSize: new window.google.maps.Size(35, 35),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(15, 15),
+            }}
+          />
+        </GoogleMap>
+      </div>
+    );
+  } else {
+    return (
+      <div className="google_maps_container_p">
+        <GoogleMap
+          mapContainerStyle={mapContainerStyle}
+          zoom={14}
+          center={props.center}
+          options={options}
+          onLoad={onMapLoad}
+        >
+          <Marker
+            position={props.center}
+            icon={{
+              url: markerImg,
+              scaledSize: new window.google.maps.Size(35, 35),
+              origin: new window.google.maps.Point(0, 0),
+              anchor: new window.google.maps.Point(15, 15),
+            }}
+          />
+        </GoogleMap>
+        ;
+      </div>
+    );
+  } */
+
+
+    return (
+      <div className="google_maps_container_p">
+        {render_search_or_display(props.value)}
+      </div>
+    );
+  }
 }
