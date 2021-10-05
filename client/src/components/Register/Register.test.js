@@ -1,4 +1,4 @@
-import Register from './Register.js';
+import Register from './Register';
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
@@ -53,6 +53,7 @@ describe('Register component', () => {
     // let options = getAllByTestId('select-option')
 
     const spyRegister = jest.spyOn(apiService, 'register')
+    // const file = new File(['hello'], 'hello.png', { type: 'image/png' })
 
     render(<MockRegister store={store} />);
 
