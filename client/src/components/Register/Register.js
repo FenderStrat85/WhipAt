@@ -14,7 +14,7 @@ const initialState = {
   model: "",
   profile: "",
 };
-export default function Register() {
+export default function Register () {
   const [state, setState] = useState(initialState);
   const dispatch = useDispatch();
   let history = useHistory();
@@ -71,6 +71,7 @@ export default function Register() {
           type="text"
           name="user_name"
           id="user_name"
+          data-testid="user_name"
           value={state.user_name}
           onChange={handleChange}
           placeholder="Username"
@@ -80,6 +81,7 @@ export default function Register() {
           type="password"
           name="password"
           id="password"
+          data-testid="password"
           value={state.password}
           onChange={handleChange}
           placeholder="Password"
@@ -89,6 +91,7 @@ export default function Register() {
           type="email"
           name="user_email"
           id="user_email"
+          data-testid="user_email"
           value={state.user_email}
           onChange={handleChange}
           placeholder="Email"
@@ -97,12 +100,13 @@ export default function Register() {
           type="text"
           name="profile"
           id="profile"
+          data-testid="profile"
           value={state.profile}
           onChange={handleChange}
           placeholder="Profile Picture link"
         />
 
-        <select name="year" id="year" onChange={handleChange}>
+        <select name="year" id="year" data-testid="year" onChange={handleChange}>
           <option value="" disabled selected>
             Year
           </option>
@@ -141,7 +145,7 @@ export default function Register() {
           <option value="1990">1990</option>
         </select>
 
-        <select name="make" id="make" onChange={handleChange}>
+        <select name="make" id="make" data-testid="make" onChange={handleChange}>
           <option value="" disabled selected>
             Make
           </option>
@@ -191,7 +195,7 @@ export default function Register() {
           <option value="VOLVO">VOLVO</option>
         </select>
 
-        <select name="model" id="model" onChange={handleChange}>
+        <select name="model" id="model" data-testid="model" onChange={handleChange}>
           <option value="" disabled selected>
             Model
           </option>
@@ -203,7 +207,9 @@ export default function Register() {
           <option value="WRANGLER">WRANGLER</option>
         </select>
 
-        <button type="submit" className="form-submit" disabled={validateForm()}>
+        <button type="submit" className="form-submit"
+        // disabled={validateForm()}
+        >
           Register
         </button>
       </form>
