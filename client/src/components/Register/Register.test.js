@@ -27,9 +27,9 @@ describe('Register component', () => {
     user_name: "Test",
     password: "123",
     user_email: "test@test.com",
-    year: "",
-    make: "",
-    model: "",
+    year: "2011",
+    make: "TOYOTA",
+    model: "COMMANDER",
     profile: "www.google.com"
   }
 
@@ -49,6 +49,9 @@ describe('Register component', () => {
 
   test('Should call Register function with the correct credentials', async () => {
 
+    // fireEvent.change(getByTestId('year'), { target: { value: 1 } })
+    // let options = getAllByTestId('select-option')
+
     const spyRegister = jest.spyOn(apiService, 'register')
 
     render(<MockRegister store={store} />);
@@ -57,9 +60,6 @@ describe('Register component', () => {
     const passwordInput = screen.getByTestId(/password/);
     const emailInput = screen.getByTestId(/user_email/);
     const profileInput = screen.getByTestId(/profile/);
-    const yearInput = screen.getByTestId(/year/);
-    const makeInput = screen.getByTestId(/make/);
-    const modelInput = screen.getByTestId(/model/);
 
     const submitButton = screen.getByRole('button', { name: 'Register' });
 
@@ -67,9 +67,9 @@ describe('Register component', () => {
     userEvent.type(passwordInput, '123');
     userEvent.type(emailInput, 'test@test.com');
     userEvent.type(profileInput, 'www.google.com');
-    userEvent.type(yearInput, '');
-    userEvent.type(makeInput, '')
-    userEvent.type(modelInput, '');
+    userEvent.selectOptions(screen.getByTestId(/year/), ['2011'])
+    userEvent.selectOptions(screen.getByTestId(/make/), ['TOYOTA'])
+    userEvent.selectOptions(screen.getByTestId(/model/), ['COMMANDER'])
 
     await userEvent.click(submitButton);
     expect(spyRegister).toHaveBeenCalledWith(credentials);

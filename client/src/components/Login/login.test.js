@@ -46,6 +46,8 @@ describe('Login component', () => {
 
   test('Should call login function with the correct credentials', async () => {
 
+
+
     //spyOn (obj, 'method inside object)
     const spyLogin = jest.spyOn(apiService, 'login')
 

@@ -34,8 +34,6 @@ export default function Login() {
     event.preventDefault();
 
     const { user_name, password } = state;
-    console.log("user_name", user_name)
-    console.log("password", password)
     const newUser = { user_name, password };
     try {
       const user = await apiService.login(newUser);
