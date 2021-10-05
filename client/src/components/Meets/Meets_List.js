@@ -3,7 +3,7 @@ import apiService from "../../utils/ApiService";
 import "./Meets_List.css";
 import Meet from "./Meet";
 
-export default function MeetsList(props) {
+export default function MeetsList (props) {
   //takes a prop that defines what type of list it will render joined, to join, my meets
   const [state, setState] = useState([]);
 
@@ -14,7 +14,7 @@ export default function MeetsList(props) {
 
   const meetButtonAction = async (action, meet) => {
     try {
-      
+
       if (action === "my") {
         await apiService.deleteMyMeet(meet);
         await getMeets();
@@ -27,19 +27,19 @@ export default function MeetsList(props) {
         await apiService.joinAMeet(meet);
         await getMeets();
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   useEffect(() => {
     getMeets();
   }, []);
-
+  console.log('meet', state);
   return (
-    <div>
+    <div >
       <ul>
         {state.map((meet) => {
           return (
-            <li key={meet.CarMeetId}>
+            <li key={meet._id} >
               <Meet
                 meet={meet}
                 meetType={props.meetType}
