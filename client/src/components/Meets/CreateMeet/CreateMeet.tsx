@@ -4,6 +4,7 @@ import apiService from "../../../utils/ApiService";
 import "./CreateMeet.css";
 import GoogleMaps from "../GoogleMaps/GoogleMaps";
 import { useSelector } from "react-redux";
+import { RootState } from "../../../utils/reducers";
 
 const initialState = {
   meet_name: "",
@@ -13,7 +14,7 @@ const initialState = {
   disable_form: true,
 };
 
-export default function CreateMeet () {
+export default function CreateMeet() {
   const [state, setState] = useState(initialState);
 
   const history = useHistory();
@@ -21,20 +22,26 @@ export default function CreateMeet () {
   //   setState((prevState) => ({ ...prevState, meet_location: state.mapInfo }));
   // });
 
-  let location = useSelector((state) => state.mapInfo);
+  // let location = useSelector((state) => state.mapInfo);
+  let location = useSelector((state: RootState) => {
+    return state.mapInfo
+  })
 
   //update private state on input change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+
+    const name = event.currentTarget.name
+    const value = event.currentTarget.value
+
     setState((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     try {
-      e.preventDefault();
+      event.preventDefault();
 
       const { meet_name, meet_date, meet_description } = state;
 
@@ -52,7 +59,7 @@ export default function CreateMeet () {
     } catch (error) { }
   };
 
-  function validateForm () {
+  function validateForm() {
     setState((prevState) => ({
       ...prevState,
       disable_form:
@@ -96,7 +103,7 @@ export default function CreateMeet () {
         />
 
         <div className="google_maps_cont">
-          <GoogleMaps value={true}></GoogleMaps>
+          {/* <GoogleMaps value={true}></GoogleMaps> */}
         </div>
 
         <button

@@ -48,7 +48,6 @@ const login = async (req: any, res: express.Response) => {
     if (!passValidation) throw new Error();
     req.session.sid = user._id;
     user.password = null;
-    console.log(req.session.sid, 'LOGIN SID');
     res.status(200).send(user);
   } catch (error) {
     res.status(401);
