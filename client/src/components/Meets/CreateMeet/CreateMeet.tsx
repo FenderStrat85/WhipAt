@@ -52,6 +52,7 @@ export default function CreateMeet() {
         meet_location: location,
       };
 
+      console.log('GEO DATA', newMeet.meet_location);
 
       //send new meet to db, potentialy do not need to create in store
       await apiService.createMeet(newMeet);

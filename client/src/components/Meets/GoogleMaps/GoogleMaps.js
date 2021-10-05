@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import markerImg from "../../../images/pistons.png";
 import { update_map } from "../../../utils/actions";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
@@ -12,10 +12,7 @@ const mapContainerStyle = {
   width: "89vw",
   height: "34vh",
 };
-let center = {
-  lng: 80.1918,
-  lat: 25.7617,
-};
+
 const options = {
   // style:
   disableDefaultUI: true,
@@ -25,16 +22,25 @@ const options = {
 export default function GoogleMaps (props) {
   const dispatch = useDispatch();
 
+  let center;
+
+
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries: libraries,
   });
   const [marker, setMarker] = useState({});
 
+  useEffect(() => {
+    if (Object.keys(marker).length > 0) {
+      dispatch(update_map(marker));
+    }
+  }, [marker])
+
   //on map click the state gets updated
   const updateMarker = async (event) => {
     setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
-    dispatch(update_map(marker));
+    console.log('event in GMAPS', event);
   };
 
   //ref to the map instance so that we can update it as we search
@@ -53,108 +59,72 @@ export default function GoogleMaps (props) {
   if (loadError) return <p>"Error loading maps"</p>;
   if (!isLoaded) return <p>"Loading Maps"</p>;
 
-  const render_search_or_display = (search) => {
+  // const render_search_or_display = (search) => {
 
-    const mapOptions = {
-      mapContainerStyle,
-      zoom: 14,
-      center,
-      options,
-      onLoad: onMapLoad,
-      onClick
+  const mapOptions = {
+    mapContainerStyle,
+    zoom: 14,
+    center,
+    options,
+    onLoad: onMapLoad,
+  }
+  const markerOptions = {
+    position: center,
+    icon: {
+      url: markerImg,
+      scaledSize: new window.google.maps.Size(35, 35),
+      origin: new window.google.maps.Point(0, 0),
+      anchor: new window.google.maps.Point(15, 15),
     }
-    const markerOptions = {
-      position: props.center,
-      icon: {
-        url: markerImg,
-        scaledSize: new window.google.maps.Size(35, 35),
-        origin: new window.google.maps.Point(0, 0),
-        anchor: new window.google.maps.Point(15, 15),
-      }
+  }
+
+  if (props.center) {
+    console.log('CENTER IF', props.center);
+
+    center = {
+      lng: parseFloat(props.center.lng),
+      lat: parseFloat(props.center.lat)
     }
+  } else {
+    center = {
+      lng: 80.1918,
+      lat: 25.7617,
+    };
+  }
 
-    if (search) {
-      mapOptions.mapContainerStyle = mapContainerStyle
-      mapOptions.zoom = 8
-      mapOptions.center = center
-      mapOptions.options = options
-      mapOptions.onClick = updateMarker
-    } else {
-      mapOptions.mapContainerStyle = mapContainerStyle
-      mapOptions.zoom = 14
-      mapOptions.center = props.center
-      mapOptions.options = options
-      mapOptions.onClick = updateMarker
-    }
+  if (props.value) {
+    mapOptions.mapContainerStyle = mapContainerStyle
+    mapOptions.zoom = 8
+    mapOptions.center = center
+    mapOptions.options = options
+    mapOptions.onClick = updateMarker
+  } else {
+    mapOptions.mapContainerStyle = mapContainerStyle
+    mapOptions.zoom = 14
+    mapOptions.center = props.center
+    mapOptions.options = options
+  }
 
+  console.log('mapOptions', mapOptions.center);
 
-    // if (search) {
-    return (
-      <div className="google_maps_container_p">
+  return (
+    <div className="google_maps_container_p">
+      {props.value &&
         <div className="search_container_g">
           <Search panTo={panTo}></Search>
         </div>
-        <GoogleMap {...mapOptions}>
-          <Marker {...markerOptions} />
-        </GoogleMap>
-
-      </div>
-
-    )
-    // }
-
-
-
-    /* <GoogleMap
-          mapContainerStyle={mapContainerStyle}
-          zoom={8}
-          center={center}
-          options={options}
-          onClick={updateMarker}
-          onLoad={onMapLoad}
-        >
-          <Marker
-            position={marker}
-            icon={{
-              url: markerImg,
-              scaledSize: new window.google.maps.Size(35, 35),
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15),
-            }}
-          />
-        </GoogleMap>
-      </div>
-    );
-  } else {
-    return (
-      <div className="google_maps_container_p">
-        <GoogleMap
-          mapContainerStyle={mapContainerStyle}
-          zoom={14}
-          center={props.center}
-          options={options}
-          onLoad={onMapLoad}
-        >
-          <Marker
-            position={props.center}
-            icon={{
-              url: markerImg,
-              scaledSize: new window.google.maps.Size(35, 35),
-              origin: new window.google.maps.Point(0, 0),
-              anchor: new window.google.maps.Point(15, 15),
-            }}
-          />
-        </GoogleMap>
-        ;
-      </div>
-    );
-  } */
-
-
-    return (
-      <div className="google_maps_container_p">
-        {render_search_or_display(props.value)}
-      </div>
-    );
-  }
+      }
+      <GoogleMap {...mapOptions}>
+        <Marker
+          position={marker}
+          icon={{
+            url: markerImg,
+            scaledSize: new window.google.maps.Size(35, 35),
+            origin: new window.google.maps.Point(0, 0),
+            anchor: new window.google.maps.Point(15, 15),
+          }}
+        />
+      </GoogleMap>
+    </div>
+  )
 }
