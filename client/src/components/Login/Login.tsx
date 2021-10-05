@@ -11,7 +11,7 @@ const initialState = {
   disable_form: true,
 };
 
-export default function Login () {
+export default function Login() {
   const [state, setState] = useState(initialState);
 
   //dispatch
@@ -44,7 +44,7 @@ export default function Login () {
     }
   };
 
-  function validateForm () {
+  function validateForm() {
     setState((prevState) => ({
       ...prevState,
       disable_form: !state.user_name || !state.password,

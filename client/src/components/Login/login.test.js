@@ -1,4 +1,4 @@
-import Login from './login.js'
+import Login from './login.tsx'
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
@@ -48,7 +48,7 @@ describe('Login component', () => {
 
     //spyOn (obj, 'method inside object)
     const spyLogin = jest.spyOn(apiService, 'login')
-    
+
     render(<MockLogin store={store} />);
 
     const userNameInput = screen.getByPlaceholderText(/Username/);

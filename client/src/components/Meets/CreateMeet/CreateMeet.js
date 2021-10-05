@@ -13,7 +13,7 @@ const initialState = {
   disable_form: true,
 };
 
-export default function CreateMeet() {
+export default function CreateMeet () {
   const [state, setState] = useState(initialState);
 
   const history = useHistory();
@@ -37,23 +37,23 @@ export default function CreateMeet() {
       e.preventDefault();
 
       const { meet_name, meet_date, meet_description } = state;
-      
+
       const newMeet = {
         meet_name,
         meet_date,
         meet_description,
         meet_location: location,
       };
-      
+
 
       //send new meet to db, potentialy do not need to create in store
       console.log('create meet file')
-      await apiService.createMeet(newMeet);      
+      await apiService.createMeet(newMeet);
       history.push("/meets");
-    } catch (error) {}
+    } catch (error) { }
   };
 
-  function validateForm() {
+  function validateForm () {
     setState((prevState) => ({
       ...prevState,
       disable_form:
@@ -103,7 +103,7 @@ export default function CreateMeet() {
         <button
           id="create_meet_button"
           type="submit"
-          disabled={state.disable_form}
+        // disabled={state.disable_form}
         >
           Create Meet
         </button>
