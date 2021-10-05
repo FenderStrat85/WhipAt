@@ -22,7 +22,7 @@ const options = {
   zoomControl: true,
 };
 
-export default function GoogleMaps(props) {
+export default function GoogleMaps (props) {
   const dispatch = useDispatch();
 
   const { isLoaded, loadError } = useLoadScript({
@@ -50,8 +50,8 @@ export default function GoogleMaps(props) {
 
   //function to pan to a map location searched
 
-  if (loadError) return "Error loading maps";
-  if (!isLoaded) return "Loading Maps";
+  if (loadError) return <p>"Error loading maps"</p>;
+  if (!isLoaded) return <p>"Loading Maps"</p>;
 
   const render_search_or_display = (search) => {
     if (search) {
@@ -77,7 +77,7 @@ export default function GoogleMaps(props) {
                 origin: new window.google.maps.Point(0, 0),
                 anchor: new window.google.maps.Point(15, 15),
               }}
-            ></Marker>
+            />
           </GoogleMap>
         </div>
       );
@@ -99,7 +99,7 @@ export default function GoogleMaps(props) {
                 origin: new window.google.maps.Point(0, 0),
                 anchor: new window.google.maps.Point(15, 15),
               }}
-            ></Marker>
+            />
           </GoogleMap>
           ;
         </div>
