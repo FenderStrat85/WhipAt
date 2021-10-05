@@ -123,7 +123,7 @@ export default function Register() {
         />
 
         <select name="year" id="year" data-testid="year" onChange={handleSelectChange}>
-          <option value="" disabled selected>
+          <option value="" disabled>
             Year
           </option>
 
@@ -162,7 +162,7 @@ export default function Register() {
         </select>
 
         <select name="make" id="make" data-testid="make" onChange={handleSelectChange}>
-          <option value="" disabled selected>
+          <option value="" disabled>
             Make
           </option>
           <option value="ACURA">ACURA</option>
@@ -212,7 +212,7 @@ export default function Register() {
         </select>
 
         <select name="model" id="model" data-testid="model" onChange={handleSelectChange}>
-          <option value="" disabled selected>
+          <option value="" disabled>
             Model
           </option>
           <option value="COMMANDER">COMMANDER</option>
