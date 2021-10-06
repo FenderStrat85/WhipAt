@@ -12,7 +12,7 @@ export default function MeetInfo () {
     lng: meet_location.lng,
     lat: meet_location.lat,
   };
-
+  console.log('CENTER', center);
   return (
     <div className="meet_info_container">
       <h1>{meet.meet_name}</h1>
