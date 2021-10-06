@@ -58,23 +58,12 @@ export default function GoogleMaps (props) {
   if (loadError) return <p>"Error loading maps"</p>;
   if (!isLoaded) return <p>"Loading Maps"</p>;
 
-  // const render_search_or_display = (search) => {
-
   const mapOptions = {
     mapContainerStyle,
     zoom: 14,
     center,
     options,
     onLoad: onMapLoad,
-  }
-  const markerOptions = {
-    position: center,
-    icon: {
-      url: markerImg,
-      scaledSize: new window.google.maps.Size(35, 35),
-      origin: new window.google.maps.Point(0, 0),
-      anchor: new window.google.maps.Point(15, 15),
-    }
   }
 
   if (props.center) {
@@ -101,6 +90,8 @@ export default function GoogleMaps (props) {
     mapOptions.center = props.center
     mapOptions.options = options
   }
+  console.log('MARKER', props.center);
+
 
   return (
     <div className="google_maps_container_p">
@@ -111,7 +102,7 @@ export default function GoogleMaps (props) {
       }
       <GoogleMap {...mapOptions}>
         <Marker
-          position={marker}
+          position={props.center ? props.center : marker}
           icon={{
             url: markerImg,
             scaledSize: new window.google.maps.Size(35, 35),
