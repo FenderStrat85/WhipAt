@@ -95,7 +95,8 @@ export default function GoogleMaps(props: any) {
     mapRef.current = map;
   }, []);
 
-  const mapLocations: any = useSelector((state: RootState) => state.mapInfo)
+  // const mapLocations: any = useSelector((state: RootState) => state.mapInfo)
+  const mapLocations: any = useSelector((state) => state)
   // console.log('LOCATIONS', mapLocations.mapInfo)
 
 
@@ -203,7 +204,7 @@ export default function GoogleMaps(props: any) {
           <Search panTo={panTo}></Search>
         </div>
       }
-      <GoogleMap {...mapOptions} onClick={updateMarker} center={mapLocations}>
+      <GoogleMap {...mapOptions} onClick={updateMarker} center={mapLocations.mapInfo}>
         <Marker
           position={props.center ? props.center : marker}
           icon={{
