@@ -23,7 +23,6 @@ const options = {
 export default function GoogleMaps(props: any) {
   const dispatch = useDispatch();
 
-  let center;
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -58,13 +57,7 @@ export default function GoogleMaps(props: any) {
   if (loadError) return <p>"Error loading maps"</p>;
   if (!isLoaded) return <p>"Loading Maps"</p>;
 
-  const mapOptions = {
-    mapContainerStyle,
-    zoom: 14,
-    center,
-    options,
-    onLoad: onMapLoad,
-  }
+  let center;
 
   if (props.center) {
     center = {
@@ -78,6 +71,13 @@ export default function GoogleMaps(props: any) {
     };
   }
 
+  const mapOptions = {
+    mapContainerStyle,
+    zoom: 14,
+    center,
+    options,
+    onLoad: onMapLoad,
+  }
   if (props.value) {
     mapOptions.mapContainerStyle = mapContainerStyle
     mapOptions.zoom = 8
