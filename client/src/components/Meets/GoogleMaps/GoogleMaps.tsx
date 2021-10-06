@@ -34,7 +34,6 @@ export default function GoogleMaps(props: any) {
   // export default function GoogleMaps(props) {
   const dispatch = useDispatch();
 
-
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries: libraries,
@@ -48,6 +47,8 @@ export default function GoogleMaps(props: any) {
   }, [marker])
 
 
+
+
   // const updateMarker = async (event) => {
 
   //   setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
@@ -58,7 +59,7 @@ export default function GoogleMaps(props: any) {
   // TS TYPES --------------------
   const updateMarker = async (event: any) => {
 
-    console.log('EVENT LAT/LONG', event.latLng);
+    // console.log('EVENT LAT/LONG', event.latLng);
 
     setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
   };
@@ -85,6 +86,9 @@ export default function GoogleMaps(props: any) {
   const mapRef = useRef(ourLocation);
   // --------------------------------
 
+  useEffect(() => {
+    dispatch(update_map(mapRef.current));
+  }, [mapRef.current])
   // const mapRef = useRef();
   //this will allow us to change the map state without causing re renders
   const onMapLoad = useCallback(async (map) => {
@@ -92,12 +96,12 @@ export default function GoogleMaps(props: any) {
   }, []);
 
   const mapLocations: any = useSelector((state) => state)
-  console.log('LOCATIONS', mapLocations.mapInfo)
+  // console.log('LOCATIONS', mapLocations.mapInfo)
+
 
   // TS ---------------------------------------------
   const panTo = useCallback(({ lat, lng }) => {
-    console.log('LATLONG', lat, lng);
-
+    dispatch(update_map({ lat, lng }));
     if (!mapRef.current) {
       return
     }
@@ -105,7 +109,7 @@ export default function GoogleMaps(props: any) {
 
     mapRef.current.lat = lat;
     mapRef.current.lng = lng;
-    console.log('MR CURRENT', mapRef.current);
+    // console.log('MR CURRENT', mapRef.current);
 
     // mapRef.current.panTo = (mapRef.current)
     // if (mapRef.current.setZoom) {
@@ -139,7 +143,7 @@ export default function GoogleMaps(props: any) {
   //--------------------------------------
 
   if (props.center) {
-    console.log('PROPS CNT LNG', props.center.lng, props.center.lat);
+    // console.log('PROPS CNT LNG', props.center.lng, props.center.lat);
 
     center = {
       lng: parseFloat(props.center.lng),
@@ -150,8 +154,8 @@ export default function GoogleMaps(props: any) {
     // let ourLocation: Map = { lat: 51, lng: 0 }
     //TS ---------------------
     // console.log('MR CURRENT', mapRef.current);
-    console.log('MR LNG inside center setting', mapRef.current.lng);
-    console.log('MR LAT inside centter setting', mapRef.current.lat);
+    // console.log('MR LNG inside center setting', mapRef.current.lng);
+    // console.log('MR LAT inside centter setting', mapRef.current.lat);
 
     center = {
       lng: mapRef.current.lng,
@@ -178,6 +182,7 @@ export default function GoogleMaps(props: any) {
     // ------
   }
   if (props.value) {
+
     mapOptions.mapContainerStyle = mapContainerStyle
     mapOptions.zoom = 8
     mapOptions.center = center
@@ -198,7 +203,7 @@ export default function GoogleMaps(props: any) {
           <Search panTo={panTo}></Search>
         </div>
       }
-      <GoogleMap {...mapOptions} onClick={updateMarker}>
+      <GoogleMap {...mapOptions} onClick={updateMarker} center={mapLocations.mapInfo}>
         <Marker
           position={props.center ? props.center : marker}
           icon={{
