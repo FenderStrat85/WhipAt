@@ -35,7 +35,7 @@ export default function GoogleMaps(props: any) {
   const dispatch = useDispatch();
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "***REMOVED***",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
     libraries: libraries,
   });
   const [marker, setMarker] = useState({});
