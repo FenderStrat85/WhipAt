@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef, useCallback, useEffect, MouseEvent } from "react";
 import markerImg from "../../../images/pistons.png";
 import { update_map } from "../../../utils/actions";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
@@ -6,12 +6,14 @@ import { useDispatch, useSelector } from "react-redux";
 import Search from "./Search";
 import "@reach/combobox/styles.css";
 import "./GoogleMaps.css";
+import { combineReducers } from "redux";
+import rootReducer from "../../../utils/reducers";
 
-const libraries = ["places"];
 
 // TS ------------------
-// const libraries: ("drawing" | "geometry" | "localContext" | "places" | "visualization")[] = ["places"];
+const libraries: ("drawing" | "geometry" | "localContext" | "places" | "visualization")[] = ["places"];
 // ---------------------
+// const libraries = ["places"];
 
 const mapContainerStyle = {
   width: "89vw",
@@ -26,10 +28,10 @@ const options = {
 
 
 // TS ----------------------------
-// export default function GoogleMaps (props: any) {
-// ------------------------------
+export default function GoogleMaps(props: any) {
+  // ------------------------------
 
-export default function GoogleMaps (props) {
+  // export default function GoogleMaps(props) {
   const dispatch = useDispatch();
 
 
@@ -46,31 +48,33 @@ export default function GoogleMaps (props) {
   }, [marker])
 
 
-  const updateMarker = async (event) => {
+  // const updateMarker = async (event) => {
 
-    setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
-  };
-  //on map click the state gets updated
-  // USED IN TS
-  // const updateMarker = async (event: any) => {
   //   setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
   // };
 
+  //on map click the state gets updated
+
   // TS TYPES --------------------
+  const updateMarker = async (event: any) => {
 
-  // interface Location {
-  //   lat: number,
-  //   lng: number
-  // }
+    console.log('EVENT LAT/LONG', event.latLng);
 
-  // interface Map {
-  //   lat: number,
-  //   lng: number,
-  //   panTo?: Location,
-  //   setZoom?: (zoom: number) => void
-  // }
+    setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
+  };
+  interface Location {
+    lat: number,
+    lng: number
+  }
 
-  // const ourLocation: Map = { lat: 80.1918, lng: 25.7617 }
+  interface Map {
+    lat: number,
+    lng: number,
+    panTo?: Location,
+    setZoom?: (zoom: number) => void
+  }
+
+  const ourLocation: Map = { lat: 51, lng: 0 }
 
   //-----------------
 
@@ -78,32 +82,42 @@ export default function GoogleMaps (props) {
 
   //ref to the map instance so that we can update it as we search
   // TS ------------------------------
-  // const mapRef = useRef(ourLocation);
+  const mapRef = useRef(ourLocation);
   // --------------------------------
-  const mapRef = useRef();
+
+  // const mapRef = useRef();
   //this will allow us to change the map state without causing re renders
-  const onMapLoad = useCallback((map) => {
+  const onMapLoad = useCallback(async (map) => {
     mapRef.current = map;
   }, []);
 
+  const mapLocations: any = useSelector((state) => state)
+  console.log('LOCATIONS', mapLocations.mapInfo)
+
   // TS ---------------------------------------------
-  // const panTo = useCallback(({ lat, lng }) => {
-
-  //   if (!mapRef.current) {
-  //     return
-  //   }
-  //   mapRef.current = { lat, lng };
-
-  //   mapRef.current.panTo = ({ lat, lng })
-  //   if (mapRef.current.setZoom) {
-  //     mapRef.current.setZoom(14);
-  //   }
-  // }, [mapRef.current]);
-  // ---------------------------------------
   const panTo = useCallback(({ lat, lng }) => {
-    mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
-  }, []);
+    console.log('LATLONG', lat, lng);
+
+    if (!mapRef.current) {
+      return
+    }
+    // mapRef.current = { lat, lng };
+
+    mapRef.current.lat = lat;
+    mapRef.current.lng = lng;
+    console.log('MR CURRENT', mapRef.current);
+
+    // mapRef.current.panTo = (mapRef.current)
+    // if (mapRef.current.setZoom) {
+    //   mapRef.current.setZoom(14);
+    // }
+  }, [mapRef.current]);
+  // ---------------------------------------
+  // const panTo = useCallback(({ lat, lng }) => {
+  //   mapRef.current.panTo({ lat, lng });
+  //   mapRef.current.setZoom(14);
+  // }, []);
+
   //function to pan to a map location searched
 
   if (loadError) return <p>"Error loading maps"</p>;
@@ -125,15 +139,32 @@ export default function GoogleMaps (props) {
   //--------------------------------------
 
   if (props.center) {
+    console.log('PROPS CNT LNG', props.center.lng, props.center.lat);
+
     center = {
       lng: parseFloat(props.center.lng),
       lat: parseFloat(props.center.lat)
     }
   } else {
+
+    // let ourLocation: Map = { lat: 51, lng: 0 }
+    //TS ---------------------
+    // console.log('MR CURRENT', mapRef.current);
+    console.log('MR LNG inside center setting', mapRef.current.lng);
+    console.log('MR LAT inside centter setting', mapRef.current.lat);
+
     center = {
-      lng: mapRef.current ? mapRef.current.lng : 40,
-      lat: mapRef.current ? mapRef.current.lat : 30,
+      lng: mapRef.current.lng,
+      lat: mapRef.current.lat,
     };
+
+    //------------------------
+    //JS ---------------
+
+    // center = {
+    //   lng: mapRef.current ? mapRef.current.lng : 0.4994,
+    //   lat: mapRef.current ? mapRef.current.lat : 0.1273,
+    // };
   }
 
   const mapOptions = {
@@ -142,8 +173,8 @@ export default function GoogleMaps (props) {
     center,
     options,
     onLoad: onMapLoad,
-    //TS ------
-    // onclick
+    //JS ------
+    // onClick
     // ------
   }
   if (props.value) {
@@ -151,7 +182,8 @@ export default function GoogleMaps (props) {
     mapOptions.zoom = 8
     mapOptions.center = center
     mapOptions.options = options
-    mapOptions.onClick = updateMarker
+    //JS
+    // mapOptions.onClick = updateMarker
   } else {
     mapOptions.mapContainerStyle = mapContainerStyle
     mapOptions.zoom = 14
@@ -166,7 +198,7 @@ export default function GoogleMaps (props) {
           <Search panTo={panTo}></Search>
         </div>
       }
-      <GoogleMap {...mapOptions}>
+      <GoogleMap {...mapOptions} onClick={updateMarker}>
         <Marker
           position={props.center ? props.center : marker}
           icon={{

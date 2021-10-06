@@ -38,6 +38,7 @@ export default function MeetsList (props) {
     <div >
       <ul>
         {state.map((meet) => {
+          console.log('MEET', meet)
           return (
             <li key={meet._id} >
               <Meet

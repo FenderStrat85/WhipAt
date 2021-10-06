@@ -66,7 +66,7 @@ const meet_info = (
 
 const mapInfo = (state = { lat: 0, lng: 0 }, action: any) => {
   if (action.type === "SET_NEW_MAP_LOC") {
-
+    console.log('PAYLOAD', action.payload);
     const newState = {
       ...state,
       lat: action.payload.lat,
