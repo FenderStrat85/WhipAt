@@ -7,7 +7,7 @@ import Search from "./Search";
 import "@reach/combobox/styles.css";
 import "./GoogleMaps.css";
 import { combineReducers } from "redux";
-import rootReducer from "../../../utils/reducers";
+import rootReducer, { RootState } from "../../../utils/reducers";
 
 
 // TS ------------------
@@ -95,7 +95,7 @@ export default function GoogleMaps(props: any) {
     mapRef.current = map;
   }, []);
 
-  const mapLocations: any = useSelector((state) => state)
+  const mapLocations: any = useSelector((state: RootState) => state.mapInfo)
   // console.log('LOCATIONS', mapLocations.mapInfo)
 
 
@@ -203,7 +203,7 @@ export default function GoogleMaps(props: any) {
           <Search panTo={panTo}></Search>
         </div>
       }
-      <GoogleMap {...mapOptions} onClick={updateMarker} center={mapLocations.mapInfo}>
+      <GoogleMap {...mapOptions} onClick={updateMarker} center={mapLocations}>
         <Marker
           position={props.center ? props.center : marker}
           icon={{
