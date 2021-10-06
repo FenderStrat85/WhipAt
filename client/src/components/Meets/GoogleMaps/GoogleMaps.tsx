@@ -3,7 +3,7 @@ import markerImg from "../../../images/pistons.png";
 import { update_map } from "../../../utils/actions";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { useDispatch } from "react-redux";
-import Search from "../GoogleMaps/Search";
+import Search from "./Search";
 import "@reach/combobox/styles.css";
 import "./GoogleMaps.css";
 
@@ -19,11 +19,10 @@ const options = {
   zoomControl: true,
 };
 
-export default function GoogleMaps (props) {
+export default function GoogleMaps(props: any) {
   const dispatch = useDispatch();
 
   let center;
-
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
@@ -38,7 +37,7 @@ export default function GoogleMaps (props) {
   }, [marker])
 
   //on map click the state gets updated
-  const updateMarker = async (event) => {
+  const updateMarker = async (event: any) => {
     setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
   };
 
@@ -90,8 +89,6 @@ export default function GoogleMaps (props) {
     mapOptions.center = props.center
     mapOptions.options = options
   }
-  console.log('MARKER', props.center);
-
 
   return (
     <div className="google_maps_container_p">
