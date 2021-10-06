@@ -40,7 +40,6 @@ export default function GoogleMaps (props) {
   //on map click the state gets updated
   const updateMarker = async (event) => {
     setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
-    console.log('event in GMAPS', event);
   };
 
   //ref to the map instance so that we can update it as we search
@@ -79,8 +78,6 @@ export default function GoogleMaps (props) {
   }
 
   if (props.center) {
-    console.log('CENTER IF', props.center);
-
     center = {
       lng: parseFloat(props.center.lng),
       lat: parseFloat(props.center.lat)
@@ -104,8 +101,6 @@ export default function GoogleMaps (props) {
     mapOptions.center = props.center
     mapOptions.options = options
   }
-
-  console.log('mapOptions', mapOptions.center);
 
   return (
     <div className="google_maps_container_p">

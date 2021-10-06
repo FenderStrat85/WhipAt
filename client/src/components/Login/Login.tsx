@@ -16,7 +16,7 @@ export default function Login() {
 
   //dispatch
   const dispatch = useDispatch();
-  let history = useHistory();
+  const history = useHistory();
 
   //update private state on input change
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {

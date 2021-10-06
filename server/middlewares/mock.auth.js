@@ -1,5 +1,3 @@
-const db = require('../models/db');
-
 // eslint-disable-next-line consistent-return
 
 const authMiddleware = async (req, res, next) => {

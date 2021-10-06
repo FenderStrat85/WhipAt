@@ -33,7 +33,7 @@ export default function MeetsList (props) {
   useEffect(() => {
     getMeets();
   }, []);
-  console.log('meet', state);
+
   return (
     <div >
       <ul>
