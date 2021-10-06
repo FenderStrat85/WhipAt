@@ -7,7 +7,8 @@ import Search from "./Search";
 import "@reach/combobox/styles.css";
 import "./GoogleMaps.css";
 
-const libraries = ["places"];
+// const libraries = ["places"];
+const libraries: ("drawing" | "geometry" | "localContext" | "places" | "visualization")[] = ["places"];
 const mapContainerStyle = {
   width: "89vw",
   height: "34vh",

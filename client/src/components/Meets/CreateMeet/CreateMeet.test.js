@@ -36,10 +36,14 @@ describe('CreateMeet Component', () => {
   test('CreateMeet screen should render correctly', () => {
     render(<MockCreateMeet store={store} />)
 
-    screen.getAllByPlaceholderText(/Meet Name/);
-    screen.getAllByPlaceholderText(/Meet Date/);
-    screen.getAllByPlaceholderText(/Meet Description/);
-    screen.getAllByRole('button', { name: 'Create Meet' });
+    const meetName = screen.getAllByPlaceholderText(/Meet name/);
+    const meetDate = screen.getAllByPlaceholderText(/Meet Date/);
+    const meetDescription = screen.getAllByPlaceholderText(/Meet Description/);
+    const meetSubmit = Buttonscreen.getAllByRole('button', { name: 'Create Meet' });
+
+    //add assertions with expect
+
+
   })
 
   test('Should call createMeet function with correct credentials', async () => {
