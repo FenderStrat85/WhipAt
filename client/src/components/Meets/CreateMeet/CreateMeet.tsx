@@ -108,7 +108,7 @@ export default function CreateMeet() {
         <button
           id="create_meet_button"
           type="submit"
-        // disabled={state.disable_form}
+          disabled={state.disable_form}
         >
           Create Meet
         </button>
