@@ -1,5 +1,7 @@
 const express = require('express');
-const router = require('../../router');
+// const router = require('../../router');
+import router from '../../router'
+
 const supertest = require('supertest');
 const db = require('../../models/db');
 const { createMeet } = require('./meets');

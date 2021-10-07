@@ -5,7 +5,8 @@ import express, { Request, Response, NextFunction } from 'express';
 const cors = require('cors');
 const session = require('express-session')
 
-const router = require('./router');
+// const router = require('./router');
+import router from './router';
 const db = require('./models/db');
 require('dotenv').config()
 
