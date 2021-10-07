@@ -1,12 +1,12 @@
-import express, { Request, Response, NextFunction } from 'express';
+const express = require('express');
 // interface SIDRequest extends express.Request {
 //   session: any;
 // }
 const cors = require('cors');
 const session = require('express-session')
 
-// const router = require('./router');
-import router from './router';
+const router = require('./router');
+// import router from './router';
 const db = require('./models/db');
 require('dotenv').config()
 
@@ -41,7 +41,7 @@ app.use(
 
 app.use(router);
 // return 404 for unspecified routes
-app.get('*', (req: Request, res: Response) => {
+app.get('*', (req, res) => {
   res.status(404);
 });
 

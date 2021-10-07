@@ -1,6 +1,6 @@
 const express = require('express');
-// const router = require('../../router');
-import router from '../../router'
+const router = require('../../router');
+// import router from '../../router'
 
 const supertest = require('supertest');
 const db = require('../../models/db');
@@ -14,6 +14,8 @@ describe('Integration tests for meets api calls to database', () => {
   app.use(router);
   const request = supertest(app)
 
+
+  //MOCK AUTH MIDDLEWARE TO PASS TEST
   it('Should allow users to register a new meet in the database after going through router, checking the information returned is wht was added', async () => {
     const meetData = {
       meet_name: 'Test meet',

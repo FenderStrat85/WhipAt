@@ -1,13 +1,12 @@
-
-// const router = require('express').Router();
-import * as express from 'express';
-const router = express.Router();
+const router = require('express').Router();
+// import * as express from 'express';
+// const router = express.Router();
 
 //NO TEST
 // const authMiddleware = require('./middlewares/auth')
-import authMiddleware from './middlewares/auth'
+// import authMiddleware from './middlewares/auth'
 //TEST
-// const authMiddleware = require('./middlewares/mock.auth');
+const authMiddleware = require('./middlewares/mock.auth');
 
 const { register, login, logout } = require('./controllers/auth/auth');
 const {
@@ -40,5 +39,5 @@ router.delete('/search/removeFriend', authMiddleware, removeFriend); // removes 
 router.delete('/leave/meets', authMiddleware, leaveAMeet); // removes friend
 router.get('/logout', authMiddleware);
 
-// module.exports = router;
-export default router;
+module.exports = router;
+// export default router;
