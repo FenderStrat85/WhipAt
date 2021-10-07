@@ -40,4 +40,5 @@ router.delete('/search/removeFriend', authMiddleware, removeFriend); // removes 
 router.delete('/leave/meets', authMiddleware, leaveAMeet); // removes friend
 router.get('/logout', authMiddleware);
 
-module.exports = router;
+// module.exports = router;
+export default router;
