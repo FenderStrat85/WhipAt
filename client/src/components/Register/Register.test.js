@@ -47,6 +47,11 @@ describe('Register component', () => {
     screen.getByRole('button', { name: 'Register' });
   })
 
+  test('Button should be disabled by default', async () => {
+     render(<MockRegister store={store}/>)
+    expect(screen.getByRole('button')).toBeDisabled()
+  })
+
   test('Should call Register function with the correct credentials', async () => {
 
     // fireEvent.change(getByTestId('year'), { target: { value: 1 } })

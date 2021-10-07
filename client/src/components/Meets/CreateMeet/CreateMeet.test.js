@@ -36,14 +36,19 @@ describe('CreateMeet Component', () => {
   test('CreateMeet screen should render correctly', () => {
     render(<MockCreateMeet store={store} />)
 
-    const meetName = screen.getAllByPlaceholderText(/Meet name/);
-    const meetDate = screen.getAllByPlaceholderText(/Meet Date/);
-    const meetDescription = screen.getAllByPlaceholderText(/Meet Description/);
-    const meetSubmit = Buttonscreen.getAllByRole('button', { name: 'Create Meet' });
+    const meetName = screen.getByPlaceholderText(/Meet Name/);
+    const meetDate = screen.getByPlaceholderText(/Meet Date/);
+    const meetDescription = screen.getByPlaceholderText(/Meet Description/);
+    const meetSubmit = screen.getByRole('button', { name: 'Create Meet' });
 
     //add assertions with expect
 
 
+  })
+
+  test('Expect button to be disabled', async () => {
+    render(<MockCreateMeet store={store}/>)
+    expect(screen.getByRole('button')).toBeDisabled()
   })
 
   test('Should call createMeet function with correct credentials', async () => {
@@ -65,7 +70,7 @@ describe('CreateMeet Component', () => {
     userEvent.type(meetNameInput, 'test meet')
     userEvent.type(meetDateInput, '2021-10-01-T19:30')
     userEvent.type(meetDescriptionInput, 'first meet')
-    // userEvent.type(meetLocationInput, 'location')
+    // userEvent.type(meetLocationInput, credentials.meet_location)
 
     await userEvent.click(submitButton);
     expect(spyCreateMeet).toHaveBeenCalledWith(credentials);
