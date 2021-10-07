@@ -9,11 +9,7 @@ import "./GoogleMaps.css";
 import { combineReducers } from "redux";
 import rootReducer, { RootState } from "../../../utils/reducers";
 
-
-// TS ------------------
 const libraries: ("drawing" | "geometry" | "localContext" | "places" | "visualization")[] = ["places"];
-// ---------------------
-// const libraries = ["places"];
 
 const mapContainerStyle = {
   width: "89vw",
@@ -26,10 +22,7 @@ const options = {
   zoomControl: true,
 };
 
-
-// TS ----------------------------
 export default function GoogleMaps(props: any) {
-  // ------------------------------
 
   // export default function GoogleMaps(props) {
   const dispatch = useDispatch();
@@ -46,20 +39,9 @@ export default function GoogleMaps(props: any) {
     }
   }, [marker])
 
-
-
-
-  // const updateMarker = async (event) => {
-
-  //   setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
-  // };
-
   //on map click the state gets updated
 
-  // TS TYPES --------------------
   const updateMarker = async (event: any) => {
-
-    // console.log('EVENT LAT/LONG', event.latLng);
 
     setMarker({ lat: event.latLng.lat(), lng: event.latLng.lng() });
   };
@@ -77,51 +59,29 @@ export default function GoogleMaps(props: any) {
 
   const ourLocation: Map = { lat: 51, lng: 0 }
 
-  //-----------------
-
-
-
   //ref to the map instance so that we can update it as we search
-  // TS ------------------------------
   const mapRef = useRef(ourLocation);
-  // --------------------------------
 
-  // useEffect(() => {
-  //   dispatch(update_map(mapRef.current));
-  // }, [mapRef.current])
-  // const mapRef = useRef();
   //this will allow us to change the map state without causing re renders
   const onMapLoad = useCallback(async (map) => {
     mapRef.current = map;
   }, []);
 
+  // REDUX implementation - allows direct access to a particular part of the state - BUGGY!
   // const mapLocations: any = useSelector((state: RootState) => state.mapInfo)
+
   const mapLocations: any = useSelector((state) => state)
-  // console.log('LOCATIONS', mapLocations.mapInfo)
 
-
-  // TS ---------------------------------------------
   const panTo = useCallback(({ lat, lng }) => {
     dispatch(update_map({ lat, lng }));
     if (!mapRef.current) {
       return
     }
-    // mapRef.current = { lat, lng };
 
     mapRef.current.lat = lat;
     mapRef.current.lng = lng;
-    // console.log('MR CURRENT', mapRef.current);
 
-    // mapRef.current.panTo = (mapRef.current)
-    // if (mapRef.current.setZoom) {
-    //   mapRef.current.setZoom(14);
-    // }
   }, [mapRef.current]);
-  // ---------------------------------------
-  // const panTo = useCallback(({ lat, lng }) => {
-  //   mapRef.current.panTo({ lat, lng });
-  //   mapRef.current.setZoom(14);
-  // }, []);
 
   //function to pan to a map location searched
 
@@ -129,22 +89,8 @@ export default function GoogleMaps(props: any) {
   if (!isLoaded) return <p>"Loading Maps"</p>;
 
   let center;
-  // TS ----------------------------------
-  // if (props.center) {
-  //   center = {
-  //     lng: parseFloat(props.center.lng),
-  //     lat: parseFloat(props.center.lat)
-  //   }
-  // } else {
-  //   center = {
-  //     lng: mapRef.current.lng,
-  //     lat: mapRef.current.lat,
-  //   };
-  // }
-  //--------------------------------------
 
   if (props.center) {
-    // console.log('PROPS CNT LNG', props.center.lng, props.center.lat);
 
     center = {
       lng: parseFloat(props.center.lng),
@@ -152,24 +98,10 @@ export default function GoogleMaps(props: any) {
     }
   } else {
 
-    // let ourLocation: Map = { lat: 51, lng: 0 }
-    //TS ---------------------
-    // console.log('MR CURRENT', mapRef.current);
-    // console.log('MR LNG inside center setting', mapRef.current.lng);
-    // console.log('MR LAT inside centter setting', mapRef.current.lat);
-
     center = {
       lng: mapRef.current.lng,
       lat: mapRef.current.lat,
     };
-
-    //------------------------
-    //JS ---------------
-
-    // center = {
-    //   lng: mapRef.current ? mapRef.current.lng : 0.4994,
-    //   lat: mapRef.current ? mapRef.current.lat : 0.1273,
-    // };
   }
 
   const mapOptions = {
@@ -178,25 +110,19 @@ export default function GoogleMaps(props: any) {
     center,
     options,
     onLoad: onMapLoad,
-    //JS ------
-    // onClick
-    // ------
   }
-  if (props.value) {
 
+  if (props.value) {
     mapOptions.mapContainerStyle = mapContainerStyle
     mapOptions.zoom = 8
     mapOptions.center = center
     mapOptions.options = options
-    //JS
-    // mapOptions.onClick = updateMarker
   } else {
     mapOptions.mapContainerStyle = mapContainerStyle
     mapOptions.zoom = 14
     mapOptions.center = props.center
     mapOptions.options = options
   }
-  console.log('MAPLOC', mapLocations);
 
   return (
     <div className="google_maps_container_p">
