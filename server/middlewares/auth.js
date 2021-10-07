@@ -1,5 +1,7 @@
-import express, { Request, Response, NextFunction } from 'express';
-import Session from 'express-session'
+// import express, { Request, Response, NextFunction } from 'express';
+const express = require('express');
+// import Session from 'express-session'
+const session = require('express-session')
 
 // We have to use declaration merging to combine the user and session types
 //By virute of importing express-session in index.ts, a session interface(object in js) is added to the request interface(object in js)
@@ -14,12 +16,12 @@ const db = require('../models/db');
 
 // eslint-disable-next-line consistent-return
 
-const authMiddleWare = async (req: any, res: express.Response, next: NextFunction) => {
+const authMiddleWare = async (req, res, next) => {
   try {
     // sid is the session id
     //sid is of type string and already exists on the req.session interface.
 
-    const sid: string = req.session.sid;
+    const sid = req.session.sid;
 
     const user = await db.User.findByPk(sid);
 
@@ -34,4 +36,4 @@ const authMiddleWare = async (req: any, res: express.Response, next: NextFunctio
   }
 };
 
-export = authMiddleWare;
+module.exports = authMiddleWare;
