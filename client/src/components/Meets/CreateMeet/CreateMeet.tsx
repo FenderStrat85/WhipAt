@@ -4,6 +4,7 @@ import apiService from "../../../utils/ApiService";
 import "./CreateMeet.css";
 import GoogleMaps from "../GoogleMaps/GoogleMaps";
 import { useSelector } from "react-redux";
+import { RootState } from "../../../utils/reducers";
 
 const initialState = {
   meet_name: "",
@@ -21,36 +22,40 @@ export default function CreateMeet() {
   //   setState((prevState) => ({ ...prevState, meet_location: state.mapInfo }));
   // });
 
-  let location = useSelector((state) => state.mapInfo);
+  // let location = useSelector((state) => state.mapInfo);
+  let location = useSelector((state: RootState) => {
+    return state.mapInfo
+  })
 
   //update private state on input change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+
+    const name = event.currentTarget.name
+    const value = event.currentTarget.value
+
     setState((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (event: React.FormEvent) => {
     try {
-      e.preventDefault();
+      event.preventDefault();
 
       const { meet_name, meet_date, meet_description } = state;
-      
+
       const newMeet = {
         meet_name,
         meet_date,
         meet_description,
         meet_location: location,
       };
-      
 
       //send new meet to db, potentialy do not need to create in store
-      console.log('create meet file')
-      await apiService.createMeet(newMeet);      
+      await apiService.createMeet(newMeet);
       history.push("/meets");
-    } catch (error) {}
+    } catch (error) { }
   };
 
   function validateForm() {
@@ -97,7 +102,7 @@ export default function CreateMeet() {
         />
 
         <div className="google_maps_cont">
-          <GoogleMaps value={true}></GoogleMaps>
+          <GoogleMaps value={true} />
         </div>
 
         <button

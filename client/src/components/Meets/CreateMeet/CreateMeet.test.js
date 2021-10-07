@@ -5,7 +5,7 @@ import reducers from '../../../utils/reducers';
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 import apiService from '../../../utils/ApiService';
 import userEvent from '@testing-library/user-event';
-import CreateMeet from "./CreateMeet";
+import CreateMeet from "./CreateMeet.tsx";
 
 const MockCreateMeet = (props) => {
   return (<Provider store={props.store}>
@@ -36,17 +36,21 @@ describe('CreateMeet Component', () => {
   test('CreateMeet screen should render correctly', () => {
     render(<MockCreateMeet store={store} />)
 
-    screen.getAllByPlaceholderText(/Meet Name/);
-    screen.getAllByPlaceholderText(/Meet Date/);
-    screen.getAllByPlaceholderText(/Meet Description/);
-    screen.getAllByRole('button', { name: 'Create Meet' });
+    const meetName = screen.getAllByPlaceholderText(/Meet name/);
+    const meetDate = screen.getAllByPlaceholderText(/Meet Date/);
+    const meetDescription = screen.getAllByPlaceholderText(/Meet Description/);
+    const meetSubmit = Buttonscreen.getAllByRole('button', { name: 'Create Meet' });
+
+    //add assertions with expect
+
+
   })
 
   test('Should call createMeet function with correct credentials', async () => {
 
     const spyCreateMeet = jest.spyOn(apiService, 'createMeet')
     render(<MockCreateMeet store={store} />)
-   
+
 
     const meetNameInput = screen.getByPlaceholderText(/Meet Name/)
     const meetDateInput = screen.getByPlaceholderText(/Meet Date/)
@@ -56,7 +60,7 @@ describe('CreateMeet Component', () => {
     //form in create meets is set to disabled so it the function isn't called.
     //Need to find a way to disable this
     const submitButton = screen.getByRole('button', { name: 'Create Meet' })
-    
+
 
     userEvent.type(meetNameInput, 'test meet')
     userEvent.type(meetDateInput, '2021-10-01-T19:30')

@@ -1,4 +1,4 @@
-import Login from './login.js'
+import Login from './login.tsx'
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
@@ -17,7 +17,7 @@ const MockLogin = (props) => {
 }
 
 describe('Login component', () => {
-  // const getState = jest.fn()
+
   let store = createStore(
     reducers,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -46,9 +46,11 @@ describe('Login component', () => {
 
   test('Should call login function with the correct credentials', async () => {
 
+
+
     //spyOn (obj, 'method inside object)
     const spyLogin = jest.spyOn(apiService, 'login')
-    
+
     render(<MockLogin store={store} />);
 
     const userNameInput = screen.getByPlaceholderText(/Username/);

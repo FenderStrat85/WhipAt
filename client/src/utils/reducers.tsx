@@ -13,7 +13,7 @@ const loggedUser = (
     following_count: null,
     profile: null,
   },
-  action
+  action: any
 ) => {
   if (action.type === "LOGGEDIN") {
     const newState = {
@@ -45,7 +45,7 @@ const meet_info = (
     updatedAt: "",
     _id: "",
   },
-  action
+  action: any
 ) => {
   if (action.type === "MEET_INFO") {
     const newState = {
@@ -64,8 +64,9 @@ const meet_info = (
   return state;
 };
 
-const mapInfo = (state = { lat: 0, lng: 0 }, action) => {
+const mapInfo = (state = { lat: 0, lng: 0 }, action: any) => {
   if (action.type === "SET_NEW_MAP_LOC") {
+    console.log('PAYLOAD', action.payload);
     const newState = {
       ...state,
       lat: action.payload.lat,
@@ -77,10 +78,18 @@ const mapInfo = (state = { lat: 0, lng: 0 }, action) => {
   return state;
 };
 
-const reducers = combineReducers({
+// const reducers = combineReducers({
+//   loggedUser,
+//   meet_info,
+//   mapInfo,
+// });
+// export default reducers;
+
+export const rootReducer = combineReducers({
   loggedUser,
   meet_info,
   mapInfo,
-});
+})
+export default rootReducer
 
-export default reducers;
+export type RootState = ReturnType<typeof rootReducer>

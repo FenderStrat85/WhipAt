@@ -19,16 +19,32 @@ export default function Register() {
   const dispatch = useDispatch();
   let history = useHistory();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+
+    const name = event.currentTarget.name
+    const value = event.currentTarget.value
+
     setState((prevState) => ({
       ...prevState,
       [name]: value,
     }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    event.preventDefault();
+    const name = event.currentTarget.name
+    const value = event.currentTarget.value
+
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }))
+
+
+  }
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
 
     const { user_name, password, user_email, year, make, model, profile } =
       state;
@@ -71,6 +87,7 @@ export default function Register() {
           type="text"
           name="user_name"
           id="user_name"
+          data-testid="user_name"
           value={state.user_name}
           onChange={handleChange}
           placeholder="Username"
@@ -80,6 +97,7 @@ export default function Register() {
           type="password"
           name="password"
           id="password"
+          data-testid="password"
           value={state.password}
           onChange={handleChange}
           placeholder="Password"
@@ -89,6 +107,7 @@ export default function Register() {
           type="email"
           name="user_email"
           id="user_email"
+          data-testid="user_email"
           value={state.user_email}
           onChange={handleChange}
           placeholder="Email"
@@ -97,13 +116,14 @@ export default function Register() {
           type="text"
           name="profile"
           id="profile"
+          data-testid="profile"
           value={state.profile}
           onChange={handleChange}
           placeholder="Profile Picture link"
         />
 
-        <select name="year" id="year" onChange={handleChange}>
-          <option value="" disabled selected>
+        <select name="year" id="year" data-testid="year" onChange={handleSelectChange}>
+          <option value="" disabled>
             Year
           </option>
 
@@ -141,8 +161,8 @@ export default function Register() {
           <option value="1990">1990</option>
         </select>
 
-        <select name="make" id="make" onChange={handleChange}>
-          <option value="" disabled selected>
+        <select name="make" id="make" data-testid="make" onChange={handleSelectChange}>
+          <option value="" disabled>
             Make
           </option>
           <option value="ACURA">ACURA</option>
@@ -191,8 +211,8 @@ export default function Register() {
           <option value="VOLVO">VOLVO</option>
         </select>
 
-        <select name="model" id="model" onChange={handleChange}>
-          <option value="" disabled selected>
+        <select name="model" id="model" data-testid="model" onChange={handleSelectChange}>
+          <option value="" disabled>
             Model
           </option>
           <option value="COMMANDER">COMMANDER</option>
@@ -203,7 +223,9 @@ export default function Register() {
           <option value="WRANGLER">WRANGLER</option>
         </select>
 
-        <button type="submit" className="form-submit" disabled={validateForm()}>
+        <button type="submit" className="form-submit"
+          disabled={validateForm()}
+        >
           Register
         </button>
       </form>
