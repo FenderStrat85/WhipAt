@@ -48,7 +48,7 @@ describe('Register component', () => {
   })
 
   test('Button should be disabled by default', async () => {
-     render(<MockRegister store={store}/>)
+    render(<MockRegister store={store} />)
     expect(screen.getByRole('button')).toBeDisabled()
   })
 
