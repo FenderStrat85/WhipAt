@@ -62,7 +62,7 @@ export default function Search (props) {
           <ComboboxList>
             {status === "OK" &&
               data.map(({ id, description }) => (
-                <ComboboxOption key={id} value={description}></ComboboxOption>
+                <ComboboxOption key={id} value={description} />
               ))}
           </ComboboxList>
         </ComboboxPopover>

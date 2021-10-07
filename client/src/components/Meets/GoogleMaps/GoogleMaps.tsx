@@ -196,6 +196,7 @@ export default function GoogleMaps(props: any) {
     mapOptions.center = props.center
     mapOptions.options = options
   }
+  console.log('MAPLOC', mapLocations);
 
   return (
     <div className="google_maps_container_p">
@@ -204,7 +205,7 @@ export default function GoogleMaps(props: any) {
           <Search panTo={panTo}></Search>
         </div>
       }
-      <GoogleMap {...mapOptions} onClick={updateMarker} center={mapLocations.mapInfo}>
+      <GoogleMap {...mapOptions} onClick={updateMarker} center={props.value ? mapLocations.mapInfo : props.center}>
         <Marker
           position={props.center ? props.center : marker}
           icon={{
