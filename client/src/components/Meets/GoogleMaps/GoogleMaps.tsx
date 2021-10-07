@@ -27,10 +27,12 @@ export default function GoogleMaps(props: any) {
   // export default function GoogleMaps(props) {
   const dispatch = useDispatch();
 
+  // Dirty fix, figure out why ApiKey from .env should be a literal
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: `${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`,
     libraries: libraries,
   });
+
   const [marker, setMarker] = useState({});
 
   useEffect(() => {
