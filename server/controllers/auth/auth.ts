@@ -4,9 +4,10 @@
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const db = require('../../models/db');
+import express from 'express'
 
 // eslint-disable-next-line consistent-return
-const register = async (req, res) => {
+const register = async (req: any, res: express.Response) => {
   const { user_name, password } = req.body;
   const user = await db.User.findOne({ where: { user_name } });
 
@@ -36,7 +37,7 @@ const register = async (req, res) => {
   }
 };
 
-const login = async (req, res) => {
+const login = async (req: any, res: express.Response) => {
   try {
     const { user_name, password } = req.body;
     const user = await db.User.findOne({ where: { user_name } });
@@ -53,12 +54,12 @@ const login = async (req, res) => {
   }
 };
 
-const logout = async (req, res) => {
-  req.session.destroy((error) => {
+const logout = async (req: any, res: express.Response) => {
+  req.session.destroy((error: any) => {
     if (error) {
       res.status(500);
     } else {
-      res.clearCookies('sid');
+      res.clearCookie('sid');
       res.sendStatus(200);
     }
   });

@@ -3,7 +3,7 @@ import { useHistory } from "react-router";
 import MeetsList from "./Meets_List";
 import "./Meets.css";
 
-export default function Meets() {
+export default function Meets () {
   const history = useHistory();
   const myMeets = "my";
   const joinedMeets = "joined";
@@ -19,11 +19,11 @@ export default function Meets() {
       <div className="all_car_meets_cont">
         <div className="my_meets_container">
           <h3>My Meets</h3>
-          <MeetsList meetType={myMeets}></MeetsList>
+          <MeetsList meetType={myMeets} />
         </div>
         <div className="joined_meets_container">
           <h3>Joined Meets</h3>
-          <MeetsList meetType={joinedMeets}></MeetsList>
+          <MeetsList meetType={joinedMeets} />
         </div>
       </div>
     </div>

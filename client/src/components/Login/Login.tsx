@@ -11,27 +11,29 @@ const initialState = {
   disable_form: true,
 };
 
-export default function Login () {
+export default function Login() {
   const [state, setState] = useState(initialState);
 
   //dispatch
   const dispatch = useDispatch();
-  let history = useHistory();
+  const history = useHistory();
 
   //update private state on input change
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setState((prevState) => ({
+  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
+
+    const name = event.currentTarget.name
+    const value = event.currentTarget.value
+
+    setState(prevState => ({
       ...prevState,
       [name]: value,
     }));
   };
   //api call and update store on input submit
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
 
     const { user_name, password } = state;
-
     const newUser = { user_name, password };
     try {
       const user = await apiService.login(newUser);
@@ -44,7 +46,7 @@ export default function Login () {
     }
   };
 
-  function validateForm () {
+  function validateForm() {
     setState((prevState) => ({
       ...prevState,
       disable_form: !state.user_name || !state.password,
