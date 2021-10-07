@@ -44,6 +44,11 @@ describe('Login component', () => {
     screen.getByRole('button', { name: 'Login' });
   })
 
+  test('Button is disabled by default', async() => {
+    render(<MockLogin store={store}/>)
+    expect(screen.getByRole('button')).toBeDisabled()
+  })
+
   test('Should call login function with the correct credentials', async () => {
 
 
