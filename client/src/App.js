@@ -10,51 +10,51 @@ import JoinMeets from "./components/Meets/JoinMeets";
 import FindFriends from "./components/FindFriends/FindFriends";
 import MeetInfo from "./components/Meets/MeetInfo";
 
-function App() {
+function App () {
   return (
     <BrowserRouter>
       <div className="App">
         <Switch>
           <Route exact path="/">
-            <Login></Login>
+            <Login />
           </Route>
           <Route exact path="/register">
             <Register></Register>
           </Route>
           <Route exact path="/meets">
-            <Meets></Meets>
+            <Meets />
             <div className="nav_container">
-              <Nav></Nav>
+              <Nav />
             </div>
           </Route>
           <Route exact path="/profile">
-            <Profile></Profile>
+            <Profile />
             <div className="nav_container">
-              <Nav></Nav>
+              <Nav />
             </div>
           </Route>
           <Route exact path="/create/meet">
-            <CreateMeet></CreateMeet>
+            <CreateMeet />
             <div className="nav_container">
-              <Nav></Nav>
+              <Nav />
             </div>
           </Route>
           <Route exact path="/join/meet">
-            <JoinMeets></JoinMeets>
+            <JoinMeets />
             <div className="nav_container">
-              <Nav></Nav>
+              <Nav />
             </div>
           </Route>
           <Route exact path="/search/users">
-            <FindFriends></FindFriends>
+            <FindFriends />
             <div className="nav_container">
-              <Nav></Nav>
+              <Nav />
             </div>
           </Route>
           <Route exact path="/meet/info">
-            <MeetInfo></MeetInfo>
+            <MeetInfo />
             <div className="nav_container">
-              <Nav></Nav>
+              <Nav />
             </div>
           </Route>
         </Switch>

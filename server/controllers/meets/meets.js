@@ -7,11 +7,9 @@ const moment = require('moment');
 const db = require('../../models/db');
 
 const createMeet = async (req, res) => {
-  // console.log('res object', res)
+
   try {
     const { user } = req;
-    // console.log('user inside createMeet',user)
-    // console.log('req.body inside createMeet', req.body)
     ;
     const newCar_Meet = {
       ...req.body,

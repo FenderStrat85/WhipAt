@@ -4,6 +4,8 @@
 const bcrypt = require('bcrypt');
 const { v4: uuidv4 } = require('uuid');
 const db = require('../../models/db');
+const express = require('express')
+// import express from 'express'
 
 // eslint-disable-next-line consistent-return
 const register = async (req, res) => {
@@ -58,7 +60,7 @@ const logout = async (req, res) => {
     if (error) {
       res.status(500);
     } else {
-      res.clearCookies('sid');
+      res.clearCookie('sid');
       res.sendStatus(200);
     }
   });

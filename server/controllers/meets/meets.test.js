@@ -1,8 +1,10 @@
 const express = require('express');
 const router = require('../../router');
+// import router from '../../router'
+
 const supertest = require('supertest');
 const db = require('../../models/db');
-const {createMeet} = require ('./meets');
+const { createMeet } = require('./meets');
 const { response } = require('express');
 
 describe('Integration tests for meets api calls to database', () => {
@@ -12,6 +14,8 @@ describe('Integration tests for meets api calls to database', () => {
   app.use(router);
   const request = supertest(app)
 
+
+  //MOCK AUTH MIDDLEWARE TO PASS TEST
   it('Should allow users to register a new meet in the database after going through router, checking the information returned is wht was added', async () => {
     const meetData = {
       meet_name: 'Test meet',
@@ -32,13 +36,13 @@ describe('Integration tests for meets api calls to database', () => {
 
   it('createMeet function should create a new meet in the database', async () => {
     const req = {
-      body : {
+      body: {
         meet_name: 'Tokyo Meet',
         meet_date: '2021-10-03T09:00',
         meet_description: 'Sushi time',
         meet_location: 'Tokyo, Japan'
       },
-      user : {
+      user: {
         _id: '20389469-5881-464d-b112-f1c5c6551caf',
         user_name: 'test',
         password: '123'
@@ -46,10 +50,10 @@ describe('Integration tests for meets api calls to database', () => {
     }
 
     //both of the mockResponse object allow us to check what res.status() was called with.
-    const mockResponse = () =>  {
+    const mockResponse = () => {
       const res = {};
       res.status = jest.fn(),
-      res.send = jest.fn()
+        res.send = jest.fn()
       return res
     }
 
@@ -64,7 +68,6 @@ describe('Integration tests for meets api calls to database', () => {
 
 
     await createMeet(req, res)
-    console.log(res)
     expect(res.status).toHaveBeenCalledWith(201)
   })
 

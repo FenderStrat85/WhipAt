@@ -1,8 +1,13 @@
 const router = require('express').Router();
-//NO TEST
+// import * as express from 'express';
+// const router = express.Router();
+
+// NO TEST -
 // const authMiddleware = require('./middlewares/auth')
-//TEST
+// import authMiddleware from './middlewares/auth'
+// TEST
 const authMiddleware = require('./middlewares/mock.auth');
+
 
 const { register, login, logout } = require('./controllers/auth/auth');
 const {
@@ -36,3 +41,4 @@ router.delete('/leave/meets', authMiddleware, leaveAMeet); // removes friend
 router.get('/logout', authMiddleware);
 
 module.exports = router;
+// export default router;
