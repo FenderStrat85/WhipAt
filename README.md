@@ -23,7 +23,7 @@ The technologies we used to build this app:
 
 ### Others
 
-[Express-sessions](https://www.npmjs.com/package/express-session), 
+[Express-sessions](https://www.npmjs.com/package/express-session)
 
 ## Screenshots
 <img width="376" alt="whipat-login" src="https://user-images.githubusercontent.com/70334875/138559191-bf771a33-9413-465f-92c7-c7e70d768d19.png">
