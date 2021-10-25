@@ -68,7 +68,7 @@ You will need to create a Postgres database. You can set the name and password o
 The following command will start up the backend server
 
 ```
-whipat/server npx nodemon
+whipat/server % npx nodemon
 ```
 
 ### FrontEnd
