@@ -74,5 +74,5 @@ whipat/server npx nodemon
 ### FrontEnd
 
 ```
-transl8r/client % npm start
+whipat/client % npm start
 ```
